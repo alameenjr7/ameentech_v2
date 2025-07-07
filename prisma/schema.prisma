@@ -1,0 +1,220 @@
+// This is your Prisma schema file,
+// improved with additional columns for enhanced functionality.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Contact {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  phone     String?
+  interest  String?
+  budget    String?
+  country   String?
+  message   String   @db.Text
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  // Added a status field to track contact status (e.g., new, in progress, closed)
+  status    String?  @default("new")
+
+  @@map("contacts")
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String   @db.Text
+  icon        String?
+  isActive    Boolean  @default(true) @map("is_active")
+  order       Int      @default(0)
+  isNew       Boolean  @default(false) @map("is_new")
+  isFeatured  Boolean  @default(false) @map("is_featured")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  slug        String?  @unique // Added slug for SEO-friendly URLs
+
+  projects Project[]
+
+  @@map("services")
+}
+
+model Project {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String   @db.Text
+  image        String?
+  tags         String?
+  url          String?
+  technologies String   @db.Text // JSON string array
+  isActive     Boolean  @default(true) @map("is_active")
+  order        Int      @default(0)
+  clientName   String?  @map("client_name")
+  projectUrl   String?  @map("project_url")
+  serviceId    Int?     @map("service_id")
+  service      Service? @relation(fields: [serviceId], references: [id])
+  isNew        Boolean  @default(false) @map("is_new")
+  isFeatured   Boolean  @default(false) @map("is_featured")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  slug         String?  @unique // Added slug for SEO-friendly URLs
+  // Added a category field to classify projects
+  category     String?
+
+  @@map("projects")
+}
+
+model About {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String @db.Text
+  imageUrl    String?
+  paragraphs  String
+  stats       String
+  isActive    Boolean  @default(true) @map("is_active")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  // Added a version field to track content versions
+  version     Int      @default(1)
+
+  @@map("abouts")
+}
+
+model Setting {
+  id               Int      @id @default(autoincrement())
+  title            String
+  phone            String
+  email            String
+  address          String
+  meta_description String?  @map("meta_description")
+  meta_keywords    String?  @map("meta_keywords")
+  meta_image       String?  @map("meta_image")
+  slogan           String?  @map("slogan")
+  logo             String?  @map("logo")
+  logo_2           String?  @map("logo_2")
+  favicon          String?  @map("favicon")
+  isActive         Boolean  @default(true) @map("is_active")
+  color            String?  @map("color")
+  color_2          String?  @map("color_2")
+  color_3          String?  @map("color_3")
+  facebook         String?  @map("facebook")
+  instagram        String?  @map("instagram")
+  twitter          String?  @map("twitter")
+  linkedin         String?  @map("linkedin")
+  whatsapp         String?  @map("whatsapp")
+  telegram         String?  @map("telegram")
+  youtube          String?  @map("youtube")
+  tiktok           String?  @map("tiktok")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+  // Added a timezone field for localization
+  timezone         String?
+
+  @@map("settings")
+}
+
+model blogs {
+  id       Int    @id @default(autoincrement())
+  category String
+  date     String
+  title    String
+  excerpt  String
+  image    String
+  link     String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("blogs")
+}
+
+model faqs {
+  id       Int     @id @default(autoincrement())
+  question String  @unique 
+  answer   String? @db.Text
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("faqs")
+}
+
+model education {
+  id          Int    @id @default(autoincrement())
+  period      String
+  institution String
+  degree      String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("educations")
+}
+
+model workExperience {
+  id      Int    @id @default(autoincrement())
+  period  String
+  company String
+  role    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("workExperiences")
+}
+
+model pricingPlans {
+  id       Int     @id @default(autoincrement())
+  name     String
+  price    Decimal @default(0)
+  features String
+  icon     String
+  popular  Boolean @default(false)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("pricingPlans")
+}
+
+model tools {
+  id      Int     @id @default(autoincrement())
+  name    String
+  percent Decimal @default(0)
+  icon    String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("tools")
+}
+
+model testimonials {
+  id     Int     @id @default(autoincrement())
+  name   String
+  role   String
+  rating Decimal @default(0)
+  text   String @db.Text
+  avatar String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("testimonials")
+}
+
+model marquee {
+  id    Int    @id @default(autoincrement())
+  items String @db.Text
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("marquees")
+}
