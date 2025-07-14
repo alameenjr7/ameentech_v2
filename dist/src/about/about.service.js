@@ -12,16 +12,23 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AboutService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const sharp_service_1 = require("../../libs/sharp/sharp.service");
+const fs_1 = require("fs");
+const sharp_config_1 = require("../../libs/sharp/sharp.config");
 let AboutService = class AboutService {
-    constructor(prisma) {
+    constructor(prisma, sharpService) {
         this.prisma = prisma;
+        this.sharpService = sharpService;
     }
-    async create(data) {
+    async create(data, file) {
         const createData = {
             ...data,
             paragraphs: JSON.stringify(data.paragraphs),
             stats: JSON.stringify(data.stats),
         };
+        if (file && file.buffer) {
+            createData.imageUrl = await this.sharpService.resizeImage(file.buffer, file.originalname);
+        }
         const created = await this.prisma.about.create({ data: createData });
         return {
             ...created,
@@ -30,26 +37,32 @@ let AboutService = class AboutService {
         };
     }
     async findAll(searchDto) {
-        const { q, order_by = 'created_at', order_dir = 'desc', limit, offset } = searchDto;
-        const where = q
-            ? {
-                OR: [
-                    { title: { contains: q, mode: 'insensitive' } },
-                    { description: { contains: q, mode: 'insensitive' } },
-                ],
-            }
-            : {};
-        const abouts = await this.prisma.about.findMany({
-            where,
-            orderBy: { [order_by]: order_dir },
-            take: limit,
-            skip: offset,
-        });
-        return abouts.map((about) => ({
-            ...about,
-            paragraphs: JSON.parse(about.paragraphs),
-            stats: JSON.parse(about.stats),
-        }));
+        const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
+        const where = {};
+        if (q) {
+            where.OR = [
+                { title: { contains: q } },
+                { stats: { contains: q } },
+            ];
+        }
+        const orderBy = {};
+        if (order_by === 'title') {
+            orderBy.title = order_dir;
+        }
+        else {
+            orderBy.createdAt = order_dir;
+        }
+        try {
+            return await this.prisma.about.findMany({
+                where,
+                orderBy,
+                take: limit,
+                skip: offset,
+            });
+        }
+        catch (error) {
+            throw new common_1.BadRequestException('Error retrieving About');
+        }
     }
     async findOne(id) {
         const about = await this.prisma.about.findUnique({ where: { id } });
@@ -61,7 +74,7 @@ let AboutService = class AboutService {
             stats: JSON.parse(about.stats),
         };
     }
-    async update(id, data) {
+    async update(id, data, file) {
         const about = await this.prisma.about.findUnique({ where: { id } });
         if (!about)
             throw new common_1.NotFoundException('About not found');
@@ -70,6 +83,18 @@ let AboutService = class AboutService {
             paragraphs: data.paragraphs ? JSON.stringify(data.paragraphs) : about.paragraphs,
             stats: data.stats ? JSON.stringify(data.stats) : about.stats,
         };
+        if (file && file.buffer) {
+            updateData.imageUrl = await this.sharpService.resizeImage(file.buffer, file.originalname);
+            if (about.imageUrl) {
+                try {
+                    const oldImagePath = sharp_config_1.sharpConfig.getOutputPath(about.imageUrl);
+                    await fs_1.promises.unlink(oldImagePath);
+                }
+                catch (error) {
+                    console.error(`Impossible de supprimer l'ancienne image : ${about.imageUrl}`, error);
+                }
+            }
+        }
         const updated = await this.prisma.about.update({ where: { id }, data: updateData });
         return {
             ...updated,
@@ -87,6 +112,7 @@ let AboutService = class AboutService {
 exports.AboutService = AboutService;
 exports.AboutService = AboutService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        sharp_service_1.SharpService])
 ], AboutService);
 //# sourceMappingURL=about.service.js.map

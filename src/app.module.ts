@@ -14,6 +14,7 @@ import { TestimonialsModule } from './testimonials/testimonials.module';
 import { ToolsModule } from './tools/tools.module';
 import { WorkExperiencesModule } from './work-experiences/work-experiences.module';
 import { MarqueesModule } from './marquees/marquee.module';
+import { MailingModule } from './mailing/mailing.module';
 
 @Module({
   imports: [
@@ -33,7 +34,8 @@ import { MarqueesModule } from './marquees/marquee.module';
     TestimonialsModule,
     ToolsModule,
     WorkExperiencesModule,
-    MarqueesModule
+    MarqueesModule,
+    MailingModule
   ],
 })
 export class AppModule {}

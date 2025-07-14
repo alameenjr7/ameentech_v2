@@ -49,13 +49,13 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Projet actif ?', example: true }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
+    (0, class_transformer_1.Type)(() => Boolean),
     __metadata("design:type", Boolean)
 ], CreateProjectDto.prototype, "isActive", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Ordre d\'affichage', example: 1 }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Type)(() => Number),
     __metadata("design:type", Number)
 ], CreateProjectDto.prototype, "order", void 0);
 __decorate([
@@ -73,19 +73,19 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'ID du service associé', example: 2 }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Type)(() => Number),
     __metadata("design:type", Number)
 ], CreateProjectDto.prototype, "serviceId", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Nouveau projet ?', example: false }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
+    (0, class_transformer_1.Type)(() => Boolean),
     __metadata("design:type", Boolean)
 ], CreateProjectDto.prototype, "isNew", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Projet en vedette ?', example: false }),
     (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
+    (0, class_transformer_1.Type)(() => Boolean),
     __metadata("design:type", Boolean)
 ], CreateProjectDto.prototype, "isFeatured", void 0);
 __decorate([

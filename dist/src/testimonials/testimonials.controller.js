@@ -19,12 +19,13 @@ const testimonials_service_1 = require("./testimonials.service");
 const testimonial_dto_1 = require("../../libs/dto/testimonial.dto");
 const error_response_1 = require("../../libs/errors/error.response");
 const search_dto_1 = require("../../libs/global/search.dto");
+const platform_express_1 = require("@nestjs/platform-express");
 let TestimonialsController = class TestimonialsController {
     constructor(testimonialsService) {
         this.testimonialsService = testimonialsService;
     }
-    create(createTestimonialDto) {
-        return this.testimonialsService.create(createTestimonialDto);
+    create(createTestimonialDto, file) {
+        return this.testimonialsService.create(createTestimonialDto, file);
     }
     findAll(searchDto) {
         return this.testimonialsService.findAll(searchDto);
@@ -32,8 +33,8 @@ let TestimonialsController = class TestimonialsController {
     findOne(id) {
         return this.testimonialsService.findOne(+id);
     }
-    update(id, updateTestimonialDto) {
-        return this.testimonialsService.update(+id, updateTestimonialDto);
+    update(id, updateTestimonialDto, file) {
+        return this.testimonialsService.update(+id, updateTestimonialDto, file);
     }
     remove(id) {
         return this.testimonialsService.remove(+id);
@@ -45,9 +46,25 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Create a new testimonial' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Testimonial created successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, swagger_1.ApiBody)({
+        description: 'Data to create a testimonial, including an image (avatar).',
+        schema: {
+            type: 'object',
+            properties: {
+                name: { type: 'string', example: 'John Doe' },
+                role: { type: 'string', example: 'CEO' },
+                text: { type: 'string', example: 'This is a testimonial' },
+                rating: { type: 'number', example: 5 },
+                avatar: { type: 'string', format: 'binary', description: 'Image du témoignage' },
+            },
+        },
+    }),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [testimonial_dto_1.CreateTestimonialDto]),
+    __metadata("design:paramtypes", [testimonial_dto_1.CreateTestimonialDto, Object]),
     __metadata("design:returntype", void 0)
 ], TestimonialsController.prototype, "create", null);
 __decorate([
@@ -80,14 +97,29 @@ __decorate([
 __decorate([
     (0, common_1.Patch)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Update a testimonial' }),
-    (0, swagger_1.ApiParam)({ name: 'id', description: 'Testimonial ID' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Testimonial updated successfully' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Testimonial not found', type: error_response_1.ErrorResponse }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, swagger_1.ApiBody)({
+        description: 'Data to update a testimonial. All fields are optional.',
+        schema: {
+            type: 'object',
+            properties: {
+                name: { type: 'string', example: 'John Doe' },
+                role: { type: 'string', example: 'CEO' },
+                text: { type: 'string', example: 'This is a testimonial' },
+                rating: { type: 'number', example: 5 },
+                avatar: { type: 'string', format: 'binary', description: 'Image du témoignage' },
+            },
+        },
+    }),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('avatar')),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, testimonial_dto_1.UpdateTestimonialDto]),
+    __metadata("design:paramtypes", [String, testimonial_dto_1.UpdateTestimonialDto, Object]),
     __metadata("design:returntype", void 0)
 ], TestimonialsController.prototype, "update", null);
 __decorate([

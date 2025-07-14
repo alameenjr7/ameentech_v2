@@ -4,25 +4,31 @@ import { SearchDto } from '../../libs/global/search.dto';
 export declare class AboutController {
     private readonly aboutService;
     constructor(aboutService: AboutService);
-    create(createAboutDto: AboutDto): Promise<{
+    create(createAboutDto: AboutDto, file?: Express.Multer.File): Promise<{
         paragraphs: any;
         stats: any;
         version: number;
         description: string;
         title: string;
         imageUrl: string | null;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
         id: number;
     }>;
     findAll(searchDto: SearchDto): Promise<{
-        paragraphs: any;
-        stats: any;
         version: number;
         description: string;
         title: string;
         imageUrl: string | null;
+        paragraphs: string;
+        stats: string;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -35,18 +41,24 @@ export declare class AboutController {
         description: string;
         title: string;
         imageUrl: string | null;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
         id: number;
     }>;
-    update(id: string, updateAboutDto: UpdateAboutDto): Promise<{
+    update(id: string, updateAboutDto: UpdateAboutDto, file?: Express.Multer.File): Promise<{
         paragraphs: any;
         stats: any;
         version: number;
         description: string;
         title: string;
         imageUrl: string | null;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -59,6 +71,9 @@ export declare class AboutController {
         imageUrl: string | null;
         paragraphs: string;
         stats: string;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;

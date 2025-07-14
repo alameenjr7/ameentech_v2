@@ -23,6 +23,7 @@ const testimonials_module_1 = require("./testimonials/testimonials.module");
 const tools_module_1 = require("./tools/tools.module");
 const work_experiences_module_1 = require("./work-experiences/work-experiences.module");
 const marquee_module_1 = require("./marquees/marquee.module");
+const mailing_module_1 = require("./mailing/mailing.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -45,7 +46,8 @@ exports.AppModule = AppModule = __decorate([
             testimonials_module_1.TestimonialsModule,
             tools_module_1.ToolsModule,
             work_experiences_module_1.WorkExperiencesModule,
-            marquee_module_1.MarqueesModule
+            marquee_module_1.MarqueesModule,
+            mailing_module_1.MailingModule
         ],
     })
 ], AppModule);

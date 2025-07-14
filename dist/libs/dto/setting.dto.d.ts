@@ -5,12 +5,7 @@ export declare class CreateSettingDto {
     address: string;
     meta_description?: string;
     meta_keywords?: string;
-    meta_image?: string;
     slogan?: string;
-    logo?: string;
-    logo_2?: string;
-    favicon?: string;
-    isActive?: boolean;
     color?: string;
     color_2?: string;
     color_3?: string;
@@ -22,9 +17,11 @@ export declare class CreateSettingDto {
     telegram?: string;
     youtube?: string;
     tiktok?: string;
+    domain?: string;
     createdAt?: Date;
     updatedAt?: Date;
     timezone?: string;
+    isActive?: boolean;
 }
 declare const UpdateSettingDto_base: import("@nestjs/common").Type<Partial<CreateSettingDto>>;
 export declare class UpdateSettingDto extends UpdateSettingDto_base {

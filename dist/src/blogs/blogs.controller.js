@@ -19,12 +19,13 @@ const blogs_service_1 = require("./blogs.service");
 const blog_dto_1 = require("../../libs/dto/blog.dto");
 const error_response_1 = require("../../libs/errors/error.response");
 const search_dto_1 = require("../../libs/global/search.dto");
+const platform_express_1 = require("@nestjs/platform-express");
 let BlogsController = class BlogsController {
     constructor(blogsService) {
         this.blogsService = blogsService;
     }
-    create(createBlogDto) {
-        return this.blogsService.create(createBlogDto);
+    async create(createBlogDto, file) {
+        return this.blogsService.create(createBlogDto, file);
     }
     findAll(searchDto) {
         return this.blogsService.findAll(searchDto);
@@ -32,8 +33,8 @@ let BlogsController = class BlogsController {
     findOne(id) {
         return this.blogsService.findOne(+id);
     }
-    update(id, updateBlogDto) {
-        return this.blogsService.update(+id, updateBlogDto);
+    update(id, updateBlogDto, file) {
+        return this.blogsService.update(+id, updateBlogDto, file);
     }
     remove(id) {
         return this.blogsService.remove(+id);
@@ -45,10 +46,31 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Create a new blog post' }),
     (0, swagger_1.ApiResponse)({ status: 201, description: 'Blog post created successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, swagger_1.ApiBody)({
+        description: 'Données pour créer un article de blog, y compris une image.',
+        schema: {
+            type: 'object',
+            properties: {
+                category: { type: 'string', example: 'Technology' },
+                date: { type: 'string', example: '2024-07-26' },
+                title: { type: 'string', example: 'The Future of AI' },
+                excerpt: { type: 'string', example: 'A brief overview...' },
+                link: { type: 'string', example: 'https://example.com/blog/...' },
+                image: {
+                    type: 'string',
+                    format: 'binary',
+                    description: 'Le fichier image pour l\'article de blog.',
+                },
+            },
+        },
+    }),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image')),
     __param(0, (0, common_1.Body)()),
+    __param(1, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [blog_dto_1.CreateBlogDto]),
-    __metadata("design:returntype", void 0)
+    __metadata("design:paramtypes", [blog_dto_1.CreateBlogDto, Object]),
+    __metadata("design:returntype", Promise)
 ], BlogsController.prototype, "create", null);
 __decorate([
     (0, common_1.Get)(),
@@ -84,10 +106,31 @@ __decorate([
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Blog post updated successfully' }),
     (0, swagger_1.ApiResponse)({ status: 404, description: 'Blog post not found', type: error_response_1.ErrorResponse }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiConsumes)('multipart/form-data'),
+    (0, swagger_1.ApiBody)({
+        description: 'Données pour mettre à jour un article. Tous les champs sont optionnels.',
+        schema: {
+            type: 'object',
+            properties: {
+                category: { type: 'string' },
+                date: { type: 'string' },
+                title: { type: 'string' },
+                excerpt: { type: 'string' },
+                link: { type: 'string' },
+                image: {
+                    type: 'string',
+                    format: 'binary',
+                    description: 'Un nouveau fichier image pour remplacer l\'ancien (optionnel).',
+                },
+            },
+        },
+    }),
+    (0, common_1.UseInterceptors)((0, platform_express_1.FileInterceptor)('image')),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
+    __param(2, (0, common_1.UploadedFile)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, blog_dto_1.UpdateBlogDto]),
+    __metadata("design:paramtypes", [String, blog_dto_1.UpdateBlogDto, Object]),
     __metadata("design:returntype", void 0)
 ], BlogsController.prototype, "update", null);
 __decorate([

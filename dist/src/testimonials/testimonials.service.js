@@ -12,19 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TestimonialsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const sharp_service_1 = require("../../libs/sharp/sharp.service");
+const fs_1 = require("fs");
+const sharp_config_1 = require("../../libs/sharp/sharp.config");
 let TestimonialsService = class TestimonialsService {
-    constructor(prisma) {
+    constructor(prisma, sharpService) {
         this.prisma = prisma;
+        this.sharpService = sharpService;
     }
-    async create(createTestimonialDto) {
+    async create(createTestimonialDto, file) {
         try {
-            return await this.prisma.testimonials.create({
-                data: {
-                    ...createTestimonialDto,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
-            });
+            const dataToCreate = {
+                ...createTestimonialDto,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+            if (file && file.buffer) {
+                dataToCreate.avatar = await this.sharpService.resizeImage(file.buffer, file.originalname);
+            }
+            return await this.prisma.testimonials.create({ data: dataToCreate });
         }
         catch (error) {
             throw new common_1.BadRequestException('Error creating testimonial');
@@ -79,18 +85,31 @@ let TestimonialsService = class TestimonialsService {
             throw new common_1.BadRequestException('Error retrieving testimonial');
         }
     }
-    async update(id, updateTestimonialDto) {
+    async update(id, updateTestimonialDto, file) {
         if (!id || isNaN(id)) {
             throw new common_1.BadRequestException('Invalid ID');
         }
-        await this.findOne(id);
+        const testimonial = await this.findOne(id);
         try {
+            const dataToUpdate = {
+                ...updateTestimonialDto,
+                updatedAt: new Date(),
+            };
+            if (file && file.buffer) {
+                dataToUpdate.avatar = await this.sharpService.resizeImage(file.buffer, file.originalname);
+                if (testimonial.avatar) {
+                    try {
+                        const oldImagePath = sharp_config_1.sharpConfig.getOutputPath(testimonial.avatar);
+                        await fs_1.promises.unlink(oldImagePath);
+                    }
+                    catch (e) {
+                        console.error(`Impossible de supprimer l'ancien avatar: ${testimonial.avatar}`, e);
+                    }
+                }
+            }
             return await this.prisma.testimonials.update({
                 where: { id },
-                data: {
-                    ...updateTestimonialDto,
-                    updatedAt: new Date(),
-                },
+                data: dataToUpdate,
             });
         }
         catch (error) {
@@ -115,6 +134,7 @@ let TestimonialsService = class TestimonialsService {
 exports.TestimonialsService = TestimonialsService;
 exports.TestimonialsService = TestimonialsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        sharp_service_1.SharpService])
 ], TestimonialsService);
 //# sourceMappingURL=testimonials.service.js.map

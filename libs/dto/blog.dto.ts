@@ -23,11 +23,6 @@ export class CreateBlogDto {
   @IsString()
   excerpt: string;
 
-  @ApiProperty({ description: 'Image URL for the blog post', example: 'https://example.com/image.jpg' })
-  @IsNotEmpty()
-  @IsString()
-  image: string;
-
   @ApiProperty({ description: 'Link to the full blog post', example: 'https://example.com/blog/the-future-of-ai' })
   @IsNotEmpty()
   @IsString()
@@ -46,4 +41,4 @@ export class CreateBlogDto {
   updatedAt?: Date;
 }
 
-export class UpdateBlogDto extends PartialType(CreateBlogDto) {}
+export class UpdateBlogDto extends PartialType(CreateBlogDto) { }

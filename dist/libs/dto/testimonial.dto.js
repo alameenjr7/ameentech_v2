@@ -32,6 +32,7 @@ __decorate([
     (0, swagger_1.ApiProperty)({ description: 'Rating given', example: 5 }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsNumber)(),
+    (0, class_transformer_1.Type)(() => Number),
     __metadata("design:type", Number)
 ], CreateTestimonialDto.prototype, "rating", void 0);
 __decorate([
@@ -40,12 +41,6 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateTestimonialDto.prototype, "text", void 0);
-__decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Avatar of the person', example: 'avatar.png' }),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateTestimonialDto.prototype, "avatar", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Creation date', example: '2024-05-01T12:00:00Z' }),
     (0, class_validator_1.IsOptional)(),

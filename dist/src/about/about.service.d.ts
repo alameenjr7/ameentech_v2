@@ -1,27 +1,36 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { AboutDto, UpdateAboutDto } from '../../libs/dto/about.dto';
+import { SearchDto } from 'libs/global/search.dto';
+import { SharpService } from '../../libs/sharp/sharp.service';
 export declare class AboutService {
     private readonly prisma;
-    constructor(prisma: PrismaService);
-    create(data: AboutDto): Promise<{
+    private readonly sharpService;
+    constructor(prisma: PrismaService, sharpService: SharpService);
+    create(data: AboutDto, file?: Express.Multer.File): Promise<{
         paragraphs: any;
         stats: any;
         version: number;
         description: string;
         title: string;
         imageUrl: string | null;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
         id: number;
     }>;
-    findAll(searchDto: import('../../libs/global/search.dto').SearchDto): Promise<{
-        paragraphs: any;
-        stats: any;
+    findAll(searchDto?: SearchDto): Promise<{
         version: number;
         description: string;
         title: string;
         imageUrl: string | null;
+        paragraphs: string;
+        stats: string;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -34,18 +43,24 @@ export declare class AboutService {
         description: string;
         title: string;
         imageUrl: string | null;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
         id: number;
     }>;
-    update(id: number, data: UpdateAboutDto): Promise<{
+    update(id: number, data: UpdateAboutDto, file?: Express.Multer.File): Promise<{
         paragraphs: any;
         stats: any;
         version: number;
         description: string;
         title: string;
         imageUrl: string | null;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -58,6 +73,9 @@ export declare class AboutService {
         imageUrl: string | null;
         paragraphs: string;
         stats: string;
+        yearExperience: string | null;
+        clients: string | null;
+        signature: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;

@@ -11,12 +11,13 @@ const common_1 = require("@nestjs/common");
 const testimonials_controller_1 = require("./testimonials.controller");
 const testimonials_service_1 = require("./testimonials.service");
 const prisma_module_1 = require("../prisma/prisma.module");
+const sharp_module_1 = require("../../libs/sharp/sharp.module");
 let TestimonialsModule = class TestimonialsModule {
 };
 exports.TestimonialsModule = TestimonialsModule;
 exports.TestimonialsModule = TestimonialsModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [prisma_module_1.PrismaModule, sharp_module_1.SharpModule],
         controllers: [testimonials_controller_1.TestimonialsController],
         providers: [testimonials_service_1.TestimonialsService],
     })

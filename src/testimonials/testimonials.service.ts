@@ -2,20 +2,30 @@ import { Injectable, NotFoundException, BadRequestException } from '@nestjs/comm
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateTestimonialDto, UpdateTestimonialDto } from '../../libs/dto/testimonial.dto';
 import { SearchDto } from '../../libs/global/search.dto';
+import { SharpService } from '../../libs/sharp/sharp.service';
+import { promises as fs } from 'fs';
+import { sharpConfig } from '../../libs/sharp/sharp.config';
 
 @Injectable()
 export class TestimonialsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    private prisma: PrismaService,
+    private sharpService: SharpService,
+  ) {}
 
-  async create(createTestimonialDto: CreateTestimonialDto) {
+  async create(createTestimonialDto: CreateTestimonialDto, file?: Express.Multer.File) {
     try {
-      return await this.prisma.testimonials.create({
-        data: {
-          ...createTestimonialDto,
-          createdAt: new Date(),
-          updatedAt: new Date(),
-        },
-      });
+      const dataToCreate: any = {
+        ...createTestimonialDto,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
+
+      if (file && file.buffer) {
+        dataToCreate.avatar = await this.sharpService.resizeImage(file.buffer, file.originalname);
+      }
+
+      return await this.prisma.testimonials.create({ data: dataToCreate });
     } catch (error) {
       throw new BadRequestException('Error creating testimonial');
     }
@@ -82,20 +92,34 @@ export class TestimonialsService {
     }
   }
 
-  async update(id: number, updateTestimonialDto: UpdateTestimonialDto) {
+  async update(id: number, updateTestimonialDto: UpdateTestimonialDto, file?: Express.Multer.File) {
     if (!id || isNaN(id)) {
       throw new BadRequestException('Invalid ID');
     }
 
-    await this.findOne(id);
+    const testimonial = await this.findOne(id);
 
     try {
+      const dataToUpdate: any = {
+        ...updateTestimonialDto,
+        updatedAt: new Date(),
+      };
+
+      if (file && file.buffer) {
+        dataToUpdate.avatar = await this.sharpService.resizeImage(file.buffer, file.originalname);
+        if (testimonial.avatar) {
+          try {
+            const oldImagePath = sharpConfig.getOutputPath(testimonial.avatar);
+            await fs.unlink(oldImagePath);
+          } catch(e) {
+            console.error(`Impossible de supprimer l'ancien avatar: ${testimonial.avatar}`, e);
+          }
+        }
+      }
+
       return await this.prisma.testimonials.update({
         where: { id },
-        data: {
-          ...updateTestimonialDto,
-          updatedAt: new Date(),
-        },
+        data: dataToUpdate,
       });
     } catch (error) {
       throw new BadRequestException('Error updating testimonial');

@@ -1,10 +1,18 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateSettingDto, UpdateSettingDto } from '../../libs/dto/setting.dto';
 import { SearchDto } from '../../libs/global/search.dto';
+import { SharpService } from '../../libs/sharp/sharp.service';
+interface SettingFiles {
+    logo?: Express.Multer.File[];
+    logo_2?: Express.Multer.File[];
+    favicon?: Express.Multer.File[];
+    meta_image?: Express.Multer.File[];
+}
 export declare class SettingsService {
     private readonly prisma;
-    constructor(prisma: PrismaService);
-    create(data: CreateSettingDto): Promise<{
+    private readonly sharpService;
+    constructor(prisma: PrismaService, sharpService: SharpService);
+    create(data: CreateSettingDto, files?: SettingFiles): Promise<{
         title: string;
         isActive: boolean;
         createdAt: Date;
@@ -14,11 +22,7 @@ export declare class SettingsService {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -30,8 +34,13 @@ export declare class SettingsService {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
     findAll(searchDto?: SearchDto): Promise<{
         title: string;
@@ -43,11 +52,7 @@ export declare class SettingsService {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -59,8 +64,13 @@ export declare class SettingsService {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }[]>;
     findOne(id: number): Promise<{
         title: string;
@@ -72,11 +82,7 @@ export declare class SettingsService {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -88,10 +94,15 @@ export declare class SettingsService {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
-    update(id: number, data: UpdateSettingDto): Promise<{
+    update(id: number, data: UpdateSettingDto, files?: SettingFiles): Promise<{
         title: string;
         isActive: boolean;
         createdAt: Date;
@@ -101,11 +112,7 @@ export declare class SettingsService {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -117,8 +124,13 @@ export declare class SettingsService {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
     remove(id: number): Promise<{
         title: string;
@@ -130,11 +142,7 @@ export declare class SettingsService {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -146,7 +154,13 @@ export declare class SettingsService {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
 }
+export {};

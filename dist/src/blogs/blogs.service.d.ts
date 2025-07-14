@@ -1,10 +1,12 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateBlogDto, UpdateBlogDto } from '../../libs/dto/blog.dto';
 import { SearchDto } from '../../libs/global/search.dto';
+import { SharpService } from '../../libs/sharp/sharp.service';
 export declare class BlogsService {
     private prisma;
-    constructor(prisma: PrismaService);
-    create(createBlogDto: CreateBlogDto): Promise<{
+    private sharpService;
+    constructor(prisma: PrismaService, sharpService: SharpService);
+    create(createBlogDto: CreateBlogDto, file?: Express.Multer.File): Promise<{
         title: string;
         link: string;
         createdAt: Date;
@@ -37,7 +39,7 @@ export declare class BlogsService {
         image: string;
         id: number;
     }>;
-    update(id: number, updateBlogDto: UpdateBlogDto): Promise<{
+    update(id: number, updateBlogDto: UpdateBlogDto, file?: Express.Multer.File): Promise<{
         title: string;
         link: string;
         createdAt: Date;

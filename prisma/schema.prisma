@@ -77,6 +77,9 @@ model About {
   imageUrl    String?
   paragraphs  String
   stats       String
+  yearExperience String?
+  clients       String?
+  signature     String?
   isActive    Boolean  @default(true) @map("is_active")
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
@@ -111,6 +114,7 @@ model Setting {
   telegram         String?  @map("telegram")
   youtube          String?  @map("youtube")
   tiktok           String?  @map("tiktok")
+  domain           String?  @map("domain")
   createdAt        DateTime @default(now()) @map("created_at")
   updatedAt        DateTime @updatedAt @map("updated_at")
   // Added a timezone field for localization
@@ -217,4 +221,14 @@ model marquee {
   updatedAt DateTime @updatedAt @map("updated_at")
 
   @@map("marquees")
+}
+
+model mailing {
+  id Int    @id @default(autoincrement())
+  email String @unique @map("email")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("mailings")
 }

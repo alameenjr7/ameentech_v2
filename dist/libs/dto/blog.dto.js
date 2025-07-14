@@ -41,12 +41,6 @@ __decorate([
     __metadata("design:type", String)
 ], CreateBlogDto.prototype, "excerpt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Image URL for the blog post', example: 'https://example.com/image.jpg' }),
-    (0, class_validator_1.IsNotEmpty)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateBlogDto.prototype, "image", void 0);
-__decorate([
     (0, swagger_1.ApiProperty)({ description: 'Link to the full blog post', example: 'https://example.com/blog/the-future-of-ai' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),

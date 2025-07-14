@@ -1,21 +1,20 @@
 import { ProjectsService } from './projects.service';
-import { CreateProjectDto } from '../../libs/dto/project.dto';
-import { UpdateProjectDto } from '../../libs/dto/project.dto';
+import { CreateProjectDto, UpdateProjectDto } from '../../libs/dto/project.dto';
 import { SearchDto } from '../../libs/global/search.dto';
 export declare class ProjectsController {
     private readonly projectsService;
     constructor(projectsService: ProjectsService);
-    create(createProjectDto: CreateProjectDto): Promise<{
+    create(createProjectDto: CreateProjectDto, file?: Express.Multer.File): Promise<{
+        technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
         image: string | null;
-        technologies: string;
         order: number;
         clientName: string | null;
         projectUrl: string | null;
@@ -27,10 +26,10 @@ export declare class ProjectsController {
     }>;
     findAll(searchDto: SearchDto): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -47,10 +46,10 @@ export declare class ProjectsController {
     }[]>;
     findActive(): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -67,10 +66,10 @@ export declare class ProjectsController {
     }[]>;
     findOne(id: string): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -85,12 +84,12 @@ export declare class ProjectsController {
         slug: string | null;
         id: number;
     }>;
-    update(id: string, updateProjectDto: UpdateProjectDto): Promise<{
+    update(id: string, updateProjectDto: UpdateProjectDto, file?: Express.Multer.File): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -107,10 +106,10 @@ export declare class ProjectsController {
     }>;
     toggleActive(id: string): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;

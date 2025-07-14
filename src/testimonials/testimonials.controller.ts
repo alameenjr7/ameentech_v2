@@ -7,12 +7,15 @@ import {
   Param,
   Delete,
   Query,
+  UseInterceptors,
+  UploadedFile,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { TestimonialsService } from './testimonials.service';
 import { CreateTestimonialDto, UpdateTestimonialDto } from '../../libs/dto/testimonial.dto';
 import { ErrorResponse } from '../../libs/errors/error.response';
 import { SearchDto } from '../../libs/global/search.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @ApiTags('testimonials')
 @Controller('testimonials')
@@ -23,8 +26,23 @@ export class TestimonialsController {
   @ApiOperation({ summary: 'Create a new testimonial' })
   @ApiResponse({ status: 201, description: 'Testimonial created successfully' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  create(@Body() createTestimonialDto: CreateTestimonialDto) {
-    return this.testimonialsService.create(createTestimonialDto);
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Data to create a testimonial, including an image (avatar).',
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', example: 'John Doe' },
+        role: { type: 'string', example: 'CEO' },
+        text: { type: 'string', example: 'This is a testimonial' },
+        rating: { type: 'number', example: 5 },
+        avatar: { type: 'string', format: 'binary', description: 'Image du témoignage' },
+      },
+    },
+  })
+  @UseInterceptors(FileInterceptor('avatar'))
+  create(@Body() createTestimonialDto: CreateTestimonialDto, @UploadedFile() file?: Express.Multer.File) {
+    return this.testimonialsService.create(createTestimonialDto, file);
   }
 
   @Get()
@@ -52,12 +70,30 @@ export class TestimonialsController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Update a testimonial' })
-  @ApiParam({ name: 'id', description: 'Testimonial ID' })
   @ApiResponse({ status: 200, description: 'Testimonial updated successfully' })
   @ApiResponse({ status: 404, description: 'Testimonial not found', type: ErrorResponse })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  update(@Param('id') id: string, @Body() updateTestimonialDto: UpdateTestimonialDto) {
-    return this.testimonialsService.update(+id, updateTestimonialDto);
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Data to update a testimonial. All fields are optional.',
+    schema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string', example: 'John Doe' },
+        role: { type: 'string', example: 'CEO' },
+        text: { type: 'string', example: 'This is a testimonial' },
+        rating: { type: 'number', example: 5 },
+        avatar: { type: 'string', format: 'binary', description: 'Image du témoignage' },
+      },
+    },
+  })
+  @UseInterceptors(FileInterceptor('avatar'))
+  update(
+    @Param('id') id: string,
+    @Body() updateTestimonialDto: UpdateTestimonialDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    return this.testimonialsService.update(+id, updateTestimonialDto, file);
   }
 
   @Delete(':id')

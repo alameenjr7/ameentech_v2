@@ -4,15 +4,15 @@ import { SearchDto } from '../../libs/global/search.dto';
 export declare class TestimonialsController {
     private readonly testimonialsService;
     constructor(testimonialsService: TestimonialsService);
-    create(createTestimonialDto: CreateTestimonialDto): Promise<{
+    create(createTestimonialDto: CreateTestimonialDto, file?: Express.Multer.File): Promise<{
         name: string;
         createdAt: Date;
         updatedAt: Date;
         role: string;
         rating: import("@prisma/client/runtime/library").Decimal;
         text: string;
-        avatar: string;
         id: number;
+        avatar: string;
     }>;
     findAll(searchDto: SearchDto): Promise<{
         name: string;
@@ -21,8 +21,8 @@ export declare class TestimonialsController {
         role: string;
         rating: import("@prisma/client/runtime/library").Decimal;
         text: string;
-        avatar: string;
         id: number;
+        avatar: string;
     }[]>;
     findOne(id: string): Promise<{
         name: string;
@@ -31,18 +31,18 @@ export declare class TestimonialsController {
         role: string;
         rating: import("@prisma/client/runtime/library").Decimal;
         text: string;
-        avatar: string;
         id: number;
+        avatar: string;
     }>;
-    update(id: string, updateTestimonialDto: UpdateTestimonialDto): Promise<{
+    update(id: string, updateTestimonialDto: UpdateTestimonialDto, file?: Express.Multer.File): Promise<{
         name: string;
         createdAt: Date;
         updatedAt: Date;
         role: string;
         rating: import("@prisma/client/runtime/library").Decimal;
         text: string;
-        avatar: string;
         id: number;
+        avatar: string;
     }>;
     remove(id: string): Promise<{
         name: string;
@@ -51,7 +51,7 @@ export declare class TestimonialsController {
         role: string;
         rating: import("@prisma/client/runtime/library").Decimal;
         text: string;
-        avatar: string;
         id: number;
+        avatar: string;
     }>;
 }

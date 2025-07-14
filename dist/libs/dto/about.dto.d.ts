@@ -4,6 +4,9 @@ export declare class AboutDto {
     imageUrl?: string;
     paragraphs: string;
     stats: string;
+    yearExperience?: string;
+    clients?: string;
+    signature?: string;
     isActive?: boolean;
     version?: number;
     createdAt?: Date;

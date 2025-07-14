@@ -72,15 +72,6 @@ __decorate([
 ], CreateSettingDto.prototype, "meta_keywords", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
-        description: 'The meta image of the setting',
-        example: 'https://ameentechnology.com/meta-image.jpg'
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateSettingDto.prototype, "meta_image", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
         description: 'The slogan of the setting',
         example: 'AmeenTECH is a technology company that provides services to businesses.'
     }),
@@ -88,42 +79,6 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSettingDto.prototype, "slogan", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'The logo of the setting',
-        example: 'https://ameentechnology.com/logo.png'
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateSettingDto.prototype, "logo", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'The second logo of the setting',
-        example: 'https://ameentechnology.com/logo_2.png'
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateSettingDto.prototype, "logo_2", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'The favicon of the setting',
-        example: 'https://ameentechnology.com/favicon.png'
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsString)(),
-    __metadata("design:type", String)
-], CreateSettingDto.prototype, "favicon", void 0);
-__decorate([
-    (0, swagger_1.ApiPropertyOptional)({
-        description: 'Whether the setting is active',
-        example: true
-    }),
-    (0, class_validator_1.IsOptional)(),
-    (0, class_validator_1.IsBoolean)(),
-    __metadata("design:type", Boolean)
-], CreateSettingDto.prototype, "isActive", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Primary color of the setting',
@@ -224,6 +179,15 @@ __decorate([
     __metadata("design:type", String)
 ], CreateSettingDto.prototype, "tiktok", void 0);
 __decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Domain URL of the setting',
+        example: 'https://www.ameenaltech.com/'
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateSettingDto.prototype, "domain", void 0);
+__decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Date de création', example: '2024-05-01T12:00:00Z' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
@@ -246,6 +210,16 @@ __decorate([
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSettingDto.prototype, "timezone", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Whether the setting is active',
+        example: true
+    }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsBoolean)(),
+    (0, class_transformer_1.Type)(() => Boolean),
+    __metadata("design:type", Boolean)
+], CreateSettingDto.prototype, "isActive", void 0);
 class UpdateSettingDto extends (0, swagger_1.PartialType)(CreateSettingDto) {
 }
 exports.UpdateSettingDto = UpdateSettingDto;

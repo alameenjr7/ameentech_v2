@@ -3,7 +3,6 @@ export declare class CreateBlogDto {
     date: string;
     title: string;
     excerpt: string;
-    image: string;
     link: string;
     createdAt?: Date;
     updatedAt?: Date;

@@ -1,21 +1,45 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { AboutService } from './about.service';
 import { AboutDto, UpdateAboutDto } from '../../libs/dto/about.dto';
-import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
+import { ApiTags, ApiOperation, ApiResponse, ApiConsumes, ApiBody } from '@nestjs/swagger';
 import { SearchDto } from '../../libs/global/search.dto';
 import { ErrorResponse } from '../../libs/errors/error.response';
+import { FileInterceptor } from '@nestjs/platform-express';
 
-@ApiTags('about')
-@Controller('about')
+@ApiTags('abouts')
+@Controller('abouts')
 export class AboutController {
   constructor(private readonly aboutService: AboutService) {}
 
   @Post()
   @ApiOperation({ summary: 'Créer une nouvelle section About' })
-  @ApiResponse({ status: 201, description: 'Section About créée avec succès', type: AboutDto })
-  @ApiResponse({ status: 400, description: 'Requête invalide', type: ErrorResponse })
-  create(@Body() createAboutDto: AboutDto) {
-    return this.aboutService.create(createAboutDto);
+  @ApiResponse({ status: 201, description: 'Section About créée avec succès' })
+  @ApiResponse({ status: 400, description: 'Requête invalide' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Données pour créer la section "À propos".',
+    schema: {
+      type: 'object',
+      required: ['title', 'description', 'paragraphs', 'stats'],
+      properties: {
+        title: { type: 'string', example: 'À propos de nous' },
+        description: { type: 'string', example: 'Nous sommes une équipe...' },
+        paragraphs: { type: 'string', example: '["Paragraphe 1", "Paragraphe 2"]' },
+        stats: { type: 'string', example: '[{"number":"10+","label":"Projets"}]' },
+        yearExperience: { type: 'string', example: '[{"number":"10+","label":"Années d\'expérience"}]' },
+        clients: { type: 'string', example: '[{"number":"100+","label":"Clients"}]' },
+        signature: { type: 'string', example: 'Baaba NGOM' },
+        imageUrl: {
+          type: 'string',
+          format: 'binary',
+          description: 'Fichier image pour la section (optionnel).',
+        },
+      },
+    },
+  })
+  @UseInterceptors(FileInterceptor('imageUrl'))
+  create(@Body() createAboutDto: AboutDto, @UploadedFile() file?: Express.Multer.File) {
+    return this.aboutService.create(createAboutDto, file);
   }
 
   @Get()
@@ -37,11 +61,37 @@ export class AboutController {
 
   @Patch(':id')
   @ApiOperation({ summary: 'Mettre à jour une section About' })
-  @ApiResponse({ status: 200, description: 'Section About mise à jour', type: AboutDto })
-  @ApiResponse({ status: 404, description: 'Section About non trouvée', type: ErrorResponse })
-  @ApiResponse({ status: 400, description: 'Données de mise à jour invalides', type: ErrorResponse })
-  update(@Param('id') id: string, @Body() updateAboutDto: UpdateAboutDto) {
-    return this.aboutService.update(Number(id), updateAboutDto);
+  @ApiResponse({ status: 200, description: 'Section About mise à jour' })
+  @ApiResponse({ status: 404, description: 'Section About non trouvée' })
+  @ApiResponse({ status: 400, description: 'Données invalides' })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    description: 'Données pour mettre à jour la section "À propos". Tous les champs sont optionnels.',
+    schema: {
+      type: 'object',
+      properties: {
+        title: { type: 'string' },
+        description: { type: 'string' },
+        paragraphs: { type: 'string' },
+        stats: { type: 'string' },
+        yearExperience: { type: 'string' },
+        clients: { type: 'string' },
+        signature: { type: 'string' },
+        imageUrl: {
+          type: 'string',
+          format: 'binary',
+          description: 'Nouveau fichier image pour remplacer l\'ancien.',
+        },
+      },
+    },
+  })
+  @UseInterceptors(FileInterceptor('imageUrl'))
+  update(
+    @Param('id') id: string,
+    @Body() updateAboutDto: UpdateAboutDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    return this.aboutService.update(Number(id), updateAboutDto, file);
   }
 
   @Delete(':id')

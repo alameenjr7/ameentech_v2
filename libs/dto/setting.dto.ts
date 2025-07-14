@@ -52,52 +52,12 @@ export class CreateSettingDto {
   meta_keywords?: string;
 
   @ApiPropertyOptional({
-    description: 'The meta image of the setting',
-    example: 'https://ameentechnology.com/meta-image.jpg'
-  })
-  @IsOptional()
-  @IsString()
-  meta_image?: string;
-
-  @ApiPropertyOptional({
     description: 'The slogan of the setting',
     example: 'AmeenTECH is a technology company that provides services to businesses.'
   })
   @IsOptional()
   @IsString()
   slogan?: string;
-
-  @ApiPropertyOptional({
-    description: 'The logo of the setting',
-    example: 'https://ameentechnology.com/logo.png'
-  })
-  @IsOptional()
-  @IsString()
-  logo?: string;
-
-  @ApiPropertyOptional({
-    description: 'The second logo of the setting',
-    example: 'https://ameentechnology.com/logo_2.png'
-  })
-  @IsOptional()
-  @IsString()
-  logo_2?: string;
-
-  @ApiPropertyOptional({
-    description: 'The favicon of the setting',
-    example: 'https://ameentechnology.com/favicon.png'
-  })
-  @IsOptional()
-  @IsString()
-  favicon?: string;
-
-  @ApiPropertyOptional({
-    description: 'Whether the setting is active',
-    example: true
-  })
-  @IsOptional()
-  @IsBoolean()
-  isActive?: boolean;
 
   @ApiPropertyOptional({
     description: 'Primary color of the setting',
@@ -187,6 +147,14 @@ export class CreateSettingDto {
   @IsString()
   tiktok?: string;
 
+  @ApiPropertyOptional({
+    description: 'Domain URL of the setting',
+    example: 'https://www.ameenaltech.com/'
+  })
+  @IsOptional()
+  @IsString()
+  domain?: string;
+
   @ApiPropertyOptional({ description: 'Date de création', example: '2024-05-01T12:00:00Z' })
   @IsOptional()
   @IsDate()
@@ -206,6 +174,15 @@ export class CreateSettingDto {
   @IsOptional()
   @IsString()
   timezone?: string;
+
+  @ApiPropertyOptional({
+    description: 'Whether the setting is active',
+    example: true
+  })
+  @IsOptional()
+  @IsBoolean()
+  @Type(() => Boolean)
+  isActive?: boolean;
 }
 
 export class UpdateSettingDto extends PartialType(CreateSettingDto) {}

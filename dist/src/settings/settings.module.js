@@ -9,17 +9,17 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SettingsModule = void 0;
 const common_1 = require("@nestjs/common");
 const settings_service_1 = require("./settings.service");
-const prisma_module_1 = require("../prisma/prisma.module");
 const settings_controller_1 = require("./settings.controller");
+const prisma_module_1 = require("../prisma/prisma.module");
+const sharp_module_1 = require("../../libs/sharp/sharp.module");
 let SettingsModule = class SettingsModule {
 };
 exports.SettingsModule = SettingsModule;
 exports.SettingsModule = SettingsModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
-        providers: [settings_service_1.SettingsService],
-        exports: [settings_service_1.SettingsService],
+        imports: [prisma_module_1.PrismaModule, sharp_module_1.SharpModule],
         controllers: [settings_controller_1.SettingsController],
+        providers: [settings_service_1.SettingsService]
     })
 ], SettingsModule);
 //# sourceMappingURL=settings.module.js.map

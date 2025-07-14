@@ -18,7 +18,7 @@ export class CreatePricingPlanDto {
   @IsString()
   features: string;
 
-  @ApiProperty({ description: 'Icon for the plan', example: 'icon.png' })
+  @ApiProperty({ description: 'Icon for the plan', example: '<FaStar />' })
   @IsNotEmpty()
   @IsString()
   icon: string;

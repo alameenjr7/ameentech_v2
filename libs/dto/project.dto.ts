@@ -30,12 +30,12 @@ export class CreateProjectDto {
 
   @ApiPropertyOptional({ description: 'Projet actif ?', example: true })
   @IsOptional()
-  @IsBoolean()
+  @Type(() => Boolean)
   isActive?: boolean;
 
   @ApiPropertyOptional({ description: 'Ordre d\'affichage', example: 1 })
   @IsOptional()
-  @IsNumber()
+  @Type(() => Number)
   order?: number;
 
   @ApiPropertyOptional({ description: 'Nom du client', example: 'Entreprise X' })
@@ -50,17 +50,17 @@ export class CreateProjectDto {
 
   @ApiPropertyOptional({ description: 'ID du service associé', example: 2 })
   @IsOptional()
-  @IsNumber()
+  @Type(() => Number)
   serviceId?: number;
 
   @ApiPropertyOptional({ description: 'Nouveau projet ?', example: false })
   @IsOptional()
-  @IsBoolean()
+  @Type(() => Boolean)
   isNew?: boolean;
 
   @ApiPropertyOptional({ description: 'Projet en vedette ?', example: false })
   @IsOptional()
-  @IsBoolean()
+  @Type(() => Boolean)
   isFeatured?: boolean;
 
   @ApiPropertyOptional({ description: 'Slug SEO-friendly', example: 'site-vitrine' })

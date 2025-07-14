@@ -11,12 +11,13 @@ const common_1 = require("@nestjs/common");
 const about_controller_1 = require("./about.controller");
 const about_service_1 = require("./about.service");
 const prisma_module_1 = require("../prisma/prisma.module");
+const sharp_module_1 = require("../../libs/sharp/sharp.module");
 let AboutModule = class AboutModule {
 };
 exports.AboutModule = AboutModule;
 exports.AboutModule = AboutModule = __decorate([
     (0, common_1.Module)({
-        imports: [prisma_module_1.PrismaModule],
+        imports: [prisma_module_1.PrismaModule, sharp_module_1.SharpModule],
         controllers: [about_controller_1.AboutController],
         providers: [about_service_1.AboutService],
     })

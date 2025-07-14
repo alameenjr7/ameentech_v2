@@ -12,21 +12,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProjectsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const sharp_service_1 = require("../../libs/sharp/sharp.service");
+const fs_1 = require("fs");
+const sharp_config_1 = require("../../libs/sharp/sharp.config");
 let ProjectsService = class ProjectsService {
-    constructor(prisma) {
+    constructor(prisma, sharpService) {
         this.prisma = prisma;
+        this.sharpService = sharpService;
     }
-    async create(createProjectDto) {
+    async create(createProjectDto, file) {
         try {
-            return await this.prisma.project.create({
-                data: {
-                    ...createProjectDto,
-                    technologies: JSON.stringify(createProjectDto.technologies),
-                    tags: JSON.stringify(createProjectDto.tags),
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
-            });
+            const dataToCreate = {
+                ...createProjectDto,
+                technologies: JSON.stringify(createProjectDto.technologies),
+                tags: JSON.stringify(createProjectDto.tags),
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+            if (file && file.buffer) {
+                dataToCreate.image = await this.sharpService.resizeImage(file.buffer, file.originalname);
+            }
+            const newProject = await this.prisma.project.create({ data: dataToCreate });
+            return {
+                ...newProject,
+                technologies: newProject.technologies ? JSON.parse(newProject.technologies) : [],
+                tags: newProject.tags ? JSON.parse(newProject.tags) : [],
+            };
         }
         catch (error) {
             throw new common_1.BadRequestException('Erreur lors de la création du projet');
@@ -57,7 +68,8 @@ let ProjectsService = class ProjectsService {
             });
             return projects.map(project => ({
                 ...project,
-                technologies: JSON.parse(project.technologies),
+                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                tags: project.tags ? JSON.parse(project.tags) : [],
             }));
         }
         catch (error) {
@@ -75,7 +87,8 @@ let ProjectsService = class ProjectsService {
             });
             return projects.map(project => ({
                 ...project,
-                technologies: JSON.parse(project.technologies),
+                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                tags: project.tags ? JSON.parse(project.tags) : [],
             }));
         }
         catch (error) {
@@ -95,7 +108,8 @@ let ProjectsService = class ProjectsService {
             }
             return {
                 ...project,
-                technologies: JSON.parse(project.technologies),
+                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                tags: project.tags ? JSON.parse(project.tags) : [],
             };
         }
         catch (error) {
@@ -105,22 +119,39 @@ let ProjectsService = class ProjectsService {
             throw new common_1.BadRequestException('Erreur lors de la récupération du projet');
         }
     }
-    async update(id, updateProjectDto) {
+    async update(id, updateProjectDto, file) {
         if (!id || isNaN(id)) {
             throw new common_1.BadRequestException('ID invalide');
         }
+        const project = await this.findOne(id);
         try {
-            const updateData = { ...updateProjectDto };
+            const updateData = { ...updateProjectDto, updatedAt: new Date() };
             if (updateProjectDto.technologies) {
                 updateData.technologies = JSON.stringify(updateProjectDto.technologies);
             }
-            const project = await this.prisma.project.update({
+            if (updateProjectDto.tags) {
+                updateData.tags = JSON.stringify(updateProjectDto.tags);
+            }
+            if (file && file.buffer) {
+                updateData.image = await this.sharpService.resizeImage(file.buffer, file.originalname);
+                if (project.image) {
+                    try {
+                        const oldImagePath = sharp_config_1.sharpConfig.getOutputPath(project.image);
+                        await fs_1.promises.unlink(oldImagePath);
+                    }
+                    catch (e) {
+                        console.error(`Impossible de supprimer l'ancienne image: ${project.image}`, e);
+                    }
+                }
+            }
+            const updatedProject = await this.prisma.project.update({
                 where: { id },
                 data: updateData,
             });
             return {
-                ...project,
-                technologies: JSON.parse(project.technologies),
+                ...updatedProject,
+                technologies: updatedProject.technologies ? JSON.parse(updatedProject.technologies) : [],
+                tags: updatedProject.tags ? JSON.parse(updatedProject.tags) : [],
             };
         }
         catch (error) {
@@ -157,7 +188,8 @@ let ProjectsService = class ProjectsService {
             });
             return {
                 ...updatedProject,
-                technologies: JSON.parse(updatedProject.technologies),
+                technologies: updatedProject.technologies ? JSON.parse(updatedProject.technologies) : [],
+                tags: updatedProject.tags ? JSON.parse(updatedProject.tags) : [],
             };
         }
         catch (error) {
@@ -186,7 +218,8 @@ let ProjectsService = class ProjectsService {
             });
             return projects.map(project => ({
                 ...project,
-                technologies: JSON.parse(project.technologies),
+                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                tags: project.tags ? JSON.parse(project.tags) : [],
             }));
         }
         catch (error) {
@@ -197,6 +230,7 @@ let ProjectsService = class ProjectsService {
 exports.ProjectsService = ProjectsService;
 exports.ProjectsService = ProjectsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        sharp_service_1.SharpService])
 ], ProjectsService);
 //# sourceMappingURL=projects.service.js.map

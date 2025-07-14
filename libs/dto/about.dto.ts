@@ -23,10 +23,25 @@ export class AboutDto {
   @IsString()
   paragraphs: string;
 
-  @ApiProperty({ description: 'Statistiques (chaîne JSON)', example: '[{"number":"10+","label":"Projets"}]' })
+  @ApiProperty({ description: 'Statistiques (chaîne JSON)', example: '[{"number":"60+","label":"Projets réalisés"}]' })
   @IsNotEmpty()
   @IsString()
   stats: string;
+
+  @ApiPropertyOptional({ description: "Années d'expérience", example: '[{"number":"10+","label":"Années d\'expérience"}]' })
+  @IsOptional()
+  @IsString()
+  yearExperience?: string;
+
+  @ApiPropertyOptional({ description: 'Clients (chaîne JSON)', example: '[{"number":"100+","label":"Clients"}]' })
+  @IsOptional()
+  @IsString()
+  clients?: string;
+
+  @ApiPropertyOptional({ description: 'Signature', example: 'Baaba NGOM' })
+  @IsOptional()
+  @IsString()
+  signature?: string;
 
   @ApiPropertyOptional({ description: 'Section active ?', example: true })
   @IsOptional()

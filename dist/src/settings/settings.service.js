@@ -12,19 +12,25 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SettingsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const sharp_service_1 = require("../../libs/sharp/sharp.service");
+const fs_1 = require("fs");
+const sharp_config_1 = require("../../libs/sharp/sharp.config");
 let SettingsService = class SettingsService {
-    constructor(prisma) {
+    constructor(prisma, sharpService) {
         this.prisma = prisma;
+        this.sharpService = sharpService;
     }
-    async create(data) {
+    async create(data, files = {}) {
         try {
-            return await this.prisma.setting.create({
-                data: {
-                    ...data,
-                    createdAt: new Date(),
-                    updatedAt: new Date(),
-                },
-            });
+            const dataToCreate = { ...data, createdAt: new Date(), updatedAt: new Date() };
+            const fileFields = ['logo', 'logo_2', 'favicon', 'meta_image'];
+            for (const field of fileFields) {
+                const file = files[field]?.[0];
+                if (file) {
+                    dataToCreate[field] = await this.sharpService.resizeImage(file.buffer, file.originalname);
+                }
+            }
+            return await this.prisma.setting.create({ data: dataToCreate });
         }
         catch (error) {
             throw new common_1.BadRequestException('Erreur lors de la création du paramètre');
@@ -75,18 +81,30 @@ let SettingsService = class SettingsService {
             throw new common_1.BadRequestException('Erreur lors de la récupération du paramètre');
         }
     }
-    async update(id, data) {
+    async update(id, data, files = {}) {
         if (!id || isNaN(id)) {
             throw new common_1.BadRequestException('ID invalide');
         }
+        const setting = await this.findOne(id);
         try {
-            return await this.prisma.setting.update({
-                where: { id },
-                data: {
-                    ...data,
-                    updatedAt: new Date(),
-                },
-            });
+            const dataToUpdate = { ...data, updatedAt: new Date() };
+            const fileFields = ['logo', 'logo_2', 'favicon', 'meta_image'];
+            for (const field of fileFields) {
+                const file = files[field]?.[0];
+                if (file) {
+                    dataToUpdate[field] = await this.sharpService.resizeImage(file.buffer, file.originalname);
+                    const oldImage = setting[field];
+                    if (oldImage) {
+                        try {
+                            await fs_1.promises.unlink(sharp_config_1.sharpConfig.getOutputPath(oldImage));
+                        }
+                        catch (e) {
+                            console.error(`Impossible de supprimer l'ancienne image: ${oldImage}`, e);
+                        }
+                    }
+                }
+            }
+            return await this.prisma.setting.update({ where: { id }, data: dataToUpdate });
         }
         catch (error) {
             throw new common_1.BadRequestException('Erreur lors de la mise à jour du paramètre');
@@ -107,6 +125,7 @@ let SettingsService = class SettingsService {
 exports.SettingsService = SettingsService;
 exports.SettingsService = SettingsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        sharp_service_1.SharpService])
 ], SettingsService);
 //# sourceMappingURL=settings.service.js.map

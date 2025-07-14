@@ -1,20 +1,22 @@
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProjectDto, UpdateProjectDto } from '../../libs/dto/project.dto';
 import { SearchDto } from '../../libs/global/search.dto';
+import { SharpService } from '../../libs/sharp/sharp.service';
 export declare class ProjectsService {
     private prisma;
-    constructor(prisma: PrismaService);
-    create(createProjectDto: CreateProjectDto): Promise<{
+    private sharpService;
+    constructor(prisma: PrismaService, sharpService: SharpService);
+    create(createProjectDto: CreateProjectDto, file?: Express.Multer.File): Promise<{
+        technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
         image: string | null;
-        technologies: string;
         order: number;
         clientName: string | null;
         projectUrl: string | null;
@@ -26,10 +28,10 @@ export declare class ProjectsService {
     }>;
     findAll(searchDto?: SearchDto): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -46,10 +48,10 @@ export declare class ProjectsService {
     }[]>;
     findActive(): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -66,10 +68,10 @@ export declare class ProjectsService {
     }[]>;
     findOne(id: number): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -84,12 +86,12 @@ export declare class ProjectsService {
         slug: string | null;
         id: number;
     }>;
-    update(id: number, updateProjectDto: UpdateProjectDto): Promise<{
+    update(id: number, updateProjectDto: UpdateProjectDto, file?: Express.Multer.File): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -126,10 +128,10 @@ export declare class ProjectsService {
     }>;
     toggleActive(id: number): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
@@ -146,10 +148,10 @@ export declare class ProjectsService {
     }>;
     findByTechnology(technology: string): Promise<{
         technologies: any;
+        tags: any;
         description: string;
         title: string;
         url: string | null;
-        tags: string | null;
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;

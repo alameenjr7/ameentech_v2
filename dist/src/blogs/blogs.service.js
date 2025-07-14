@@ -12,22 +12,32 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlogsService = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
+const sharp_service_1 = require("../../libs/sharp/sharp.service");
+const fs_1 = require("fs");
+const sharp_config_1 = require("../../libs/sharp/sharp.config");
 let BlogsService = class BlogsService {
-    constructor(prisma) {
+    constructor(prisma, sharpService) {
         this.prisma = prisma;
+        this.sharpService = sharpService;
     }
-    async create(createBlogDto) {
+    async create(createBlogDto, file) {
         try {
+            let imageFilename = null;
+            if (file && file.buffer) {
+                imageFilename = await this.sharpService.resizeImage(file.buffer, file.originalname);
+            }
             return await this.prisma.blogs.create({
                 data: {
                     ...createBlogDto,
+                    image: imageFilename || '',
                     createdAt: new Date(),
                     updatedAt: new Date(),
                 },
             });
         }
         catch (error) {
-            throw new common_1.BadRequestException('Error creating blog post');
+            console.error(error);
+            throw new common_1.BadRequestException('Erreur lors de la création du blog');
         }
     }
     async findAll(searchDto) {
@@ -79,18 +89,28 @@ let BlogsService = class BlogsService {
             throw new common_1.BadRequestException('Error retrieving blog post');
         }
     }
-    async update(id, updateBlogDto) {
+    async update(id, updateBlogDto, file) {
         if (!id || isNaN(id)) {
             throw new common_1.BadRequestException('Invalid ID');
         }
-        await this.findOne(id);
+        const blogPost = await this.findOne(id);
+        const dataToUpdate = { ...updateBlogDto, updatedAt: new Date() };
+        if (file && file.buffer) {
+            dataToUpdate.image = await this.sharpService.resizeImage(file.buffer, file.originalname);
+            if (blogPost.image) {
+                try {
+                    const oldImagePath = sharp_config_1.sharpConfig.getOutputPath(blogPost.image);
+                    await fs_1.promises.unlink(oldImagePath);
+                }
+                catch (error) {
+                    console.error(`Impossible de supprimer l'ancienne image : ${blogPost.image}`, error);
+                }
+            }
+        }
         try {
             return await this.prisma.blogs.update({
                 where: { id },
-                data: {
-                    ...updateBlogDto,
-                    updatedAt: new Date(),
-                },
+                data: dataToUpdate,
             });
         }
         catch (error) {
@@ -115,6 +135,7 @@ let BlogsService = class BlogsService {
 exports.BlogsService = BlogsService;
 exports.BlogsService = BlogsService = __decorate([
     (0, common_1.Injectable)(),
-    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService,
+        sharp_service_1.SharpService])
 ], BlogsService);
 //# sourceMappingURL=blogs.service.js.map

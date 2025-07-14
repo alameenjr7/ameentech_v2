@@ -1,10 +1,16 @@
 import { SettingsService } from './settings.service';
 import { CreateSettingDto, UpdateSettingDto } from '../../libs/dto/setting.dto';
 import { SearchDto } from '../../libs/global/search.dto';
+interface SettingFiles {
+    logo?: Express.Multer.File[];
+    logo_2?: Express.Multer.File[];
+    favicon?: Express.Multer.File[];
+    meta_image?: Express.Multer.File[];
+}
 export declare class SettingsController {
     private readonly settingsService;
     constructor(settingsService: SettingsService);
-    create(createSettingDto: CreateSettingDto): Promise<{
+    create(createSettingDto: CreateSettingDto, files: SettingFiles): Promise<{
         title: string;
         isActive: boolean;
         createdAt: Date;
@@ -14,11 +20,7 @@ export declare class SettingsController {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -30,8 +32,13 @@ export declare class SettingsController {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
     findAll(searchDto: SearchDto): Promise<{
         title: string;
@@ -43,11 +50,7 @@ export declare class SettingsController {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -59,8 +62,13 @@ export declare class SettingsController {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }[]>;
     findOne(id: string): Promise<{
         title: string;
@@ -72,11 +80,7 @@ export declare class SettingsController {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -88,10 +92,15 @@ export declare class SettingsController {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
-    update(id: string, updateSettingDto: UpdateSettingDto): Promise<{
+    update(id: string, updateSettingDto: UpdateSettingDto, files: SettingFiles): Promise<{
         title: string;
         isActive: boolean;
         createdAt: Date;
@@ -101,11 +110,7 @@ export declare class SettingsController {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -117,8 +122,13 @@ export declare class SettingsController {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
     remove(id: string): Promise<{
         title: string;
@@ -130,11 +140,7 @@ export declare class SettingsController {
         address: string;
         meta_description: string | null;
         meta_keywords: string | null;
-        meta_image: string | null;
         slogan: string | null;
-        logo: string | null;
-        logo_2: string | null;
-        favicon: string | null;
         color: string | null;
         color_2: string | null;
         color_3: string | null;
@@ -146,7 +152,13 @@ export declare class SettingsController {
         telegram: string | null;
         youtube: string | null;
         tiktok: string | null;
+        domain: string | null;
         timezone: string | null;
         id: number;
+        meta_image: string | null;
+        logo: string | null;
+        logo_2: string | null;
+        favicon: string | null;
     }>;
 }
+export {};

@@ -41,11 +41,29 @@ __decorate([
     __metadata("design:type", String)
 ], AboutDto.prototype, "paragraphs", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Statistiques (chaîne JSON)', example: '[{"number":"10+","label":"Projets"}]' }),
+    (0, swagger_1.ApiProperty)({ description: 'Statistiques (chaîne JSON)', example: '[{"number":"60+","label":"Projets réalisés"}]' }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AboutDto.prototype, "stats", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: "Années d'expérience", example: '[{"number":"10+","label":"Années d\'expérience"}]' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AboutDto.prototype, "yearExperience", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Clients (chaîne JSON)', example: '[{"number":"100+","label":"Clients"}]' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AboutDto.prototype, "clients", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({ description: 'Signature', example: 'Baaba NGOM' }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], AboutDto.prototype, "signature", void 0);
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({ description: 'Section active ?', example: true }),
     (0, class_validator_1.IsOptional)(),

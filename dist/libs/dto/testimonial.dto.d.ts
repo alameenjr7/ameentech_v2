@@ -3,7 +3,6 @@ export declare class CreateTestimonialDto {
     role: string;
     rating: number;
     text: string;
-    avatar: string;
     createdAt?: Date;
     updatedAt?: Date;
 }

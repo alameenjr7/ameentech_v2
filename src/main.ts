@@ -3,17 +3,23 @@ import { ValidationPipe, INestApplication } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { corsConfig } from '../libs/cors/cors.config';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 
 async function bootstrap(): Promise<void> {
 
-  const app: INestApplication = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // Configuration pour servir les fichiers statiques
+  app.useStaticAssets(join(__dirname, '..', '..', 'uploads'), {
+    prefix: '/uploads/',
+  });
 
   // Configuration globale
   app.setGlobalPrefix('api');
 
   // Configuration CORS
   app.enableCors(corsConfig);
-
 
   // Configuration de la validation
   app.useGlobalPipes(

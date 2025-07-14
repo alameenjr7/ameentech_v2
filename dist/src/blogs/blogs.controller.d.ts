@@ -4,7 +4,7 @@ import { SearchDto } from '../../libs/global/search.dto';
 export declare class BlogsController {
     private readonly blogsService;
     constructor(blogsService: BlogsService);
-    create(createBlogDto: CreateBlogDto): Promise<{
+    create(createBlogDto: CreateBlogDto, file?: Express.Multer.File): Promise<{
         title: string;
         link: string;
         createdAt: Date;
@@ -37,7 +37,7 @@ export declare class BlogsController {
         image: string;
         id: number;
     }>;
-    update(id: string, updateBlogDto: UpdateBlogDto): Promise<{
+    update(id: string, updateBlogDto: UpdateBlogDto, file?: Express.Multer.File): Promise<{
         title: string;
         link: string;
         createdAt: Date;

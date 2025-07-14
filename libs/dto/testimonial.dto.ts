@@ -16,17 +16,13 @@ export class CreateTestimonialDto {
   @ApiProperty({ description: 'Rating given', example: 5 })
   @IsNotEmpty()
   @IsNumber()
+  @Type(() => Number)
   rating: number;
 
   @ApiProperty({ description: 'The testimonial text', example: 'This is a great service!' })
   @IsNotEmpty()
   @IsString()
   text: string;
-
-  @ApiProperty({ description: 'Avatar of the person', example: 'avatar.png' })
-  @IsNotEmpty()
-  @IsString()
-  avatar: string;
 
   @ApiPropertyOptional({ description: 'Creation date', example: '2024-05-01T12:00:00Z' })
   @IsOptional()
