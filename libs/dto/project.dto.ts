@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsString, IsArray, IsBoolean, IsOptional, IsNumber, IsUrl, IsDate } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+  IsUrl,
+  IsDate,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -8,22 +14,34 @@ export class CreateProjectDto {
   @IsString()
   title: string;
 
-  @ApiProperty({ description: 'Description du projet', example: 'Développement d\'un site vitrine pour un client.' })
+  @ApiProperty({
+    description: 'Description du projet',
+    example: "Développement d'un site vitrine pour un client.",
+  })
   @IsNotEmpty()
   @IsString()
   description: string;
 
-  @ApiPropertyOptional({ description: 'Image du projet', example: 'project-image.png' })
+  @ApiPropertyOptional({
+    description: 'Image du projet',
+    example: 'project-image.png',
+  })
   @IsOptional()
   @IsString()
   image?: string;
 
-  @ApiProperty({ description: 'Technologies utilisées (chaîne JSON)', example: '["NestJS", "React", "MySQL"]' })
+  @ApiProperty({
+    description: 'Technologies utilisées (chaîne JSON)',
+    example: '["NestJS", "React", "MySQL"]',
+  })
   @IsNotEmpty()
   @IsString()
   technologies?: string;
 
-  @ApiProperty({ description: 'Technologies utilisées (chaîne JSON)', example: '["NestJS", "React", "MySQL"]' })
+  @ApiProperty({
+    description: 'Technologies utilisées (chaîne JSON)',
+    example: '["NestJS", "React", "MySQL"]',
+  })
   @IsNotEmpty()
   @IsString()
   tags?: string;
@@ -33,17 +51,23 @@ export class CreateProjectDto {
   @Type(() => Boolean)
   isActive?: boolean;
 
-  @ApiPropertyOptional({ description: 'Ordre d\'affichage', example: 1 })
+  @ApiPropertyOptional({ description: "Ordre d'affichage", example: 1 })
   @IsOptional()
   @Type(() => Number)
   order?: number;
 
-  @ApiPropertyOptional({ description: 'Nom du client', example: 'Entreprise X' })
+  @ApiPropertyOptional({
+    description: 'Nom du client',
+    example: 'Entreprise X',
+  })
   @IsOptional()
   @IsString()
   clientName?: string;
 
-  @ApiPropertyOptional({ description: 'URL du projet', example: 'https://exemple.com' })
+  @ApiPropertyOptional({
+    description: 'URL du projet',
+    example: 'https://exemple.com',
+  })
   @IsOptional()
   @IsUrl()
   projectUrl?: string;
@@ -63,7 +87,10 @@ export class CreateProjectDto {
   @Type(() => Boolean)
   isFeatured?: boolean;
 
-  @ApiPropertyOptional({ description: 'Slug SEO-friendly', example: 'site-vitrine' })
+  @ApiPropertyOptional({
+    description: 'Slug SEO-friendly',
+    example: 'site-vitrine',
+  })
   @IsOptional()
   @IsString()
   slug?: string;
@@ -73,13 +100,19 @@ export class CreateProjectDto {
   @IsString()
   category?: string;
 
-  @ApiPropertyOptional({ description: 'Date de création', example: '2024-05-01T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de création',
+    example: '2024-05-01T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)
   createdAt?: Date;
 
-  @ApiPropertyOptional({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de mise à jour',
+    example: '2024-05-02T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)

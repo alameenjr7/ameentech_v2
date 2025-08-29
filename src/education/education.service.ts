@@ -1,6 +1,13 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateEducationDto, UpdateEducationDto } from '../../libs/dto/education.dto';
+import {
+  CreateEducationDto,
+  UpdateEducationDto,
+} from '../../libs/dto/education.dto';
 import { SearchDto } from '../../libs/global/search.dto';
 
 @Injectable()
@@ -75,7 +82,10 @@ export class EducationService {
 
       return education;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
       throw new BadRequestException('Error retrieving education entry');

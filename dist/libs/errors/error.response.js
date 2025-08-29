@@ -27,7 +27,10 @@ __decorate([
     __metadata("design:type", String)
 ], ErrorResponse.prototype, "error", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ example: new Date().toISOString(), description: 'Timestamp of the error' }),
+    (0, swagger_1.ApiProperty)({
+        example: new Date().toISOString(),
+        description: 'Timestamp of the error',
+    }),
     __metadata("design:type", String)
 ], ErrorResponse.prototype, "timestamp", void 0);
 __decorate([

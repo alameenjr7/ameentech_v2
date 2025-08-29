@@ -11,8 +11,8 @@ export declare class ServicesController {
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        icon: string | null;
         order: number;
+        icon: string | null;
         isNew: boolean;
         isFeatured: boolean;
         slug: string | null;
@@ -24,8 +24,8 @@ export declare class ServicesController {
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        icon: string | null;
         order: number;
+        icon: string | null;
         isNew: boolean;
         isFeatured: boolean;
         slug: string | null;
@@ -37,8 +37,8 @@ export declare class ServicesController {
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        icon: string | null;
         order: number;
+        icon: string | null;
         isNew: boolean;
         isFeatured: boolean;
         slug: string | null;
@@ -50,8 +50,8 @@ export declare class ServicesController {
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        icon: string | null;
         order: number;
+        icon: string | null;
         isNew: boolean;
         isFeatured: boolean;
         slug: string | null;
@@ -63,8 +63,8 @@ export declare class ServicesController {
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        icon: string | null;
         order: number;
+        icon: string | null;
         isNew: boolean;
         isFeatured: boolean;
         slug: string | null;
@@ -76,8 +76,8 @@ export declare class ServicesController {
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        icon: string | null;
         order: number;
+        icon: string | null;
         isNew: boolean;
         isFeatured: boolean;
         slug: string | null;
@@ -89,8 +89,8 @@ export declare class ServicesController {
         isActive: boolean;
         createdAt: Date;
         updatedAt: Date;
-        icon: string | null;
         order: number;
+        icon: string | null;
         isNew: boolean;
         isFeatured: boolean;
         slug: string | null;

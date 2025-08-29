@@ -13,7 +13,13 @@ import {
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto, UpdateProjectDto } from '../../libs/dto/project.dto';
-import { ApiTags, ApiOperation, ApiResponse, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiConsumes,
+  ApiBody,
+} from '@nestjs/swagger';
 import { SearchDto } from '../../libs/global/search.dto';
 import { ErrorResponse } from '../../libs/errors/error.response';
 import { FileInterceptor } from '@nestjs/platform-express';
@@ -46,12 +52,19 @@ export class ProjectsController {
         isActive: { type: 'boolean', example: true },
         order: { type: 'number', example: 1 },
         serviceId: { type: 'number', example: 1 },
-        image: { type: 'string', format: 'binary', description: 'Image du projet' },
+        image: {
+          type: 'string',
+          format: 'binary',
+          description: 'Image du projet',
+        },
       },
     },
   })
   @UseInterceptors(FileInterceptor('image'))
-  create(@Body() createProjectDto: CreateProjectDto, @UploadedFile() file?: Express.Multer.File) {
+  create(
+    @Body() createProjectDto: CreateProjectDto,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
     return this.projectsService.create(createProjectDto, file);
   }
 
@@ -68,7 +81,10 @@ export class ProjectsController {
 
   @Get('active')
   @ApiOperation({ summary: 'Get active projects' })
-  @ApiResponse({ status: 200, description: 'Active projects retrieved successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Active projects retrieved successfully',
+  })
   findActive() {
     return this.projectsService.findActive();
   }
@@ -77,7 +93,11 @@ export class ProjectsController {
   @ApiOperation({ summary: 'Get a project by ID' })
   @ApiResponse({ status: 200, description: 'Project retrieved successfully' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Project not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Project not found',
+    type: ErrorResponse,
+  })
   findOne(@Param('id') id: string) {
     return this.projectsService.findOne(+id);
   }
@@ -86,17 +106,21 @@ export class ProjectsController {
   @ApiOperation({ summary: 'Update a project' })
   @ApiResponse({ status: 200, description: 'Project updated successfully' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Project not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Project not found',
+    type: ErrorResponse,
+  })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
     description: 'Data to update a project. All fields are optional.',
     schema: {
       type: 'object',
       properties: {
-        title: { type: 'string'},
+        title: { type: 'string' },
         description: { type: 'string' },
         category: { type: 'string' },
-        clientName: { type: 'string'},
+        clientName: { type: 'string' },
         projectUrl: { type: 'string' },
         technologies: { type: 'string' },
         tags: { type: 'string' },
@@ -105,7 +129,11 @@ export class ProjectsController {
         isFeatured: { type: 'boolean' },
         isActive: { type: 'boolean' },
         order: { type: 'number' },
-        image: { type: 'string', format: 'binary', description: 'Image du projet' },
+        image: {
+          type: 'string',
+          format: 'binary',
+          description: 'Image du projet',
+        },
       },
     },
   })
@@ -120,9 +148,16 @@ export class ProjectsController {
 
   @Put(':id/toggle')
   @ApiOperation({ summary: 'Toggle project active status' })
-  @ApiResponse({ status: 200, description: 'Project active status toggled successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Project active status toggled successfully',
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Project not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Project not found',
+    type: ErrorResponse,
+  })
   toggleActive(@Param('id') id: string) {
     return this.projectsService.toggleActive(+id);
   }
@@ -131,7 +166,11 @@ export class ProjectsController {
   @ApiOperation({ summary: 'Delete a project' })
   @ApiResponse({ status: 200, description: 'Project deleted successfully' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Project not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Project not found',
+    type: ErrorResponse,
+  })
   remove(@Param('id') id: string) {
     return this.projectsService.remove(+id);
   }

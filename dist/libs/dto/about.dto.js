@@ -17,43 +17,61 @@ class AboutDto {
 }
 exports.AboutDto = AboutDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Titre de la section à propos', example: 'À propos de nous' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Titre de la section à propos',
+        example: 'À propos de nous',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AboutDto.prototype, "title", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Description principale', example: 'Nous sommes une équipe passionnée...' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Description principale',
+        example: 'Nous sommes une équipe passionnée...',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AboutDto.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'URL de l\'image', example: 'about.jpg' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: "URL de l'image", example: 'about.jpg' }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AboutDto.prototype, "imageUrl", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Paragraphes (chaîne JSON)', example: '["Paragraphe 1", "Paragraphe 2"]' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Paragraphes (chaîne JSON)',
+        example: '["Paragraphe 1", "Paragraphe 2"]',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AboutDto.prototype, "paragraphs", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Statistiques (chaîne JSON)', example: '[{"number":"60+","label":"Projets réalisés"}]' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Statistiques (chaîne JSON)',
+        example: '[{"number":"60+","label":"Projets réalisés"}]',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AboutDto.prototype, "stats", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: "Années d'expérience", example: '[{"number":"10+","label":"Années d\'expérience"}]' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: "Années d'expérience",
+        example: '[{"number":"10+","label":"Années d\'expérience"}]',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], AboutDto.prototype, "yearExperience", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Clients (chaîne JSON)', example: '[{"number":"100+","label":"Clients"}]' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Clients (chaîne JSON)',
+        example: '[{"number":"100+","label":"Clients"}]',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -77,14 +95,20 @@ __decorate([
     __metadata("design:type", Number)
 ], AboutDto.prototype, "version", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de création', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de création',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], AboutDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de mise à jour',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

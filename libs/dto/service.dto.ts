@@ -1,19 +1,35 @@
-import { IsNotEmpty, IsString, IsBoolean, IsOptional, IsNumber, IsDate } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsBoolean,
+  IsOptional,
+  IsNumber,
+  IsDate,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 export class CreateServiceDto {
-  @ApiProperty({ description: 'Titre du service', example: 'Développement Web' })
+  @ApiProperty({
+    description: 'Titre du service',
+    example: 'Développement Web',
+  })
   @IsNotEmpty()
   @IsString()
   title: string;
 
-  @ApiProperty({ description: 'Description du service', example: 'Création de sites web modernes.' })
+  @ApiProperty({
+    description: 'Description du service',
+    example: 'Création de sites web modernes.',
+  })
   @IsNotEmpty()
   @IsString()
   description: string;
 
-  @ApiPropertyOptional({ description: 'Icône du service', example: 'web-icon.png' })
+  @ApiPropertyOptional({
+    description: 'Icône du service',
+    example: 'web-icon.png',
+  })
   @IsOptional()
   @IsString()
   icon?: string;
@@ -23,7 +39,7 @@ export class CreateServiceDto {
   @IsBoolean()
   isActive?: boolean;
 
-  @ApiPropertyOptional({ description: 'Ordre d\'affichage', example: 1 })
+  @ApiPropertyOptional({ description: "Ordre d'affichage", example: 1 })
   @IsOptional()
   @IsNumber()
   order?: number;
@@ -38,18 +54,27 @@ export class CreateServiceDto {
   @IsBoolean()
   isFeatured?: boolean;
 
-  @ApiPropertyOptional({ description: 'Slug SEO-friendly', example: 'developpement-web' })
+  @ApiPropertyOptional({
+    description: 'Slug SEO-friendly',
+    example: 'developpement-web',
+  })
   @IsOptional()
   @IsString()
   slug?: string;
 
-  @ApiPropertyOptional({ description: 'Date de création', example: '2024-05-01T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de création',
+    example: '2024-05-01T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)
   createdAt?: Date;
 
-  @ApiPropertyOptional({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de mise à jour',
+    example: '2024-05-02T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)

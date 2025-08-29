@@ -1,6 +1,13 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateWorkExperienceDto, UpdateWorkExperienceDto } from '../../libs/dto/work-experience.dto';
+import {
+  CreateWorkExperienceDto,
+  UpdateWorkExperienceDto,
+} from '../../libs/dto/work-experience.dto';
 import { SearchDto } from '../../libs/global/search.dto';
 
 @Injectable()
@@ -75,7 +82,10 @@ export class WorkExperiencesService {
 
       return workExperience;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
       throw new BadRequestException('Error retrieving work experience');

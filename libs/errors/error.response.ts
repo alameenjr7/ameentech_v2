@@ -10,7 +10,10 @@ export class ErrorResponse {
   @ApiProperty({ example: 'Bad Request', description: 'Error type' })
   error: string;
 
-  @ApiProperty({ example: new Date().toISOString(), description: 'Timestamp of the error' })
+  @ApiProperty({
+    example: new Date().toISOString(),
+    description: 'Timestamp of the error',
+  })
   timestamp: string;
 
   @ApiProperty({ example: '/api/resource', description: 'Request path' })

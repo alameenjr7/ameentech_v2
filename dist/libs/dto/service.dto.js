@@ -17,19 +17,28 @@ class CreateServiceDto {
 }
 exports.CreateServiceDto = CreateServiceDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Titre du service', example: 'Développement Web' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Titre du service',
+        example: 'Développement Web',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceDto.prototype, "title", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Description du service', example: 'Création de sites web modernes.' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Description du service',
+        example: 'Création de sites web modernes.',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceDto.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Icône du service', example: 'web-icon.png' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Icône du service',
+        example: 'web-icon.png',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -41,7 +50,7 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateServiceDto.prototype, "isActive", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Ordre d\'affichage', example: 1 }),
+    (0, swagger_1.ApiPropertyOptional)({ description: "Ordre d'affichage", example: 1 }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
@@ -59,20 +68,29 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateServiceDto.prototype, "isFeatured", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Slug SEO-friendly', example: 'developpement-web' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Slug SEO-friendly',
+        example: 'developpement-web',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateServiceDto.prototype, "slug", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de création', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de création',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateServiceDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de mise à jour',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

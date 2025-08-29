@@ -16,7 +16,7 @@ exports.MailingModule = MailingModule;
 exports.MailingModule = MailingModule = __decorate([
     (0, common_1.Module)({
         providers: [mailing_service_1.MailingService],
-        controllers: [mailing_controller_1.MailingController]
+        controllers: [mailing_controller_1.MailingController],
     })
 ], MailingModule);
 //# sourceMappingURL=mailing.module.js.map

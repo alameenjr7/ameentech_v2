@@ -17,26 +17,44 @@ class CreateFaqDto {
 }
 exports.CreateFaqDto = CreateFaqDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The question for the FAQ', example: 'What is your return policy?' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The question for the FAQ',
+        example: 'What is your return policy?',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateFaqDto.prototype, "question", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'The answer to the question', example: 'Our return policy is...' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'The answer to the question',
+        example: 'Our return policy is...',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateFaqDto.prototype, "answer", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Creation date', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({ description: 'The order of the answer', example: 1 }),
+    (0, class_validator_1.IsOptional)(),
+    (0, class_validator_1.IsInt)(),
+    __metadata("design:type", Number)
+], CreateFaqDto.prototype, "order", void 0);
+__decorate([
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Creation date',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateFaqDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Update date', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Update date',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

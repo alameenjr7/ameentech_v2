@@ -75,7 +75,8 @@ let ContactsService = class ContactsService {
             return contact;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Erreur lors de la récupération du contact');
@@ -121,8 +122,8 @@ let ContactsService = class ContactsService {
             return await this.prisma.contact.findMany({
                 where: {
                     email: {
-                        contains: email
-                    }
+                        contains: email,
+                    },
                 },
                 orderBy: {
                     createdAt: 'desc',
@@ -141,8 +142,8 @@ let ContactsService = class ContactsService {
             return await this.prisma.contact.findMany({
                 where: {
                     interest: {
-                        contains: interest
-                    }
+                        contains: interest,
+                    },
                 },
                 orderBy: {
                     createdAt: 'desc',

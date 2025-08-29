@@ -10,7 +10,15 @@ import {
   UseInterceptors,
   UploadedFile,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery, ApiConsumes, ApiBody } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiQuery,
+  ApiConsumes,
+  ApiBody,
+} from '@nestjs/swagger';
 import { BlogsService } from './blogs.service';
 import { CreateBlogDto, UpdateBlogDto } from '../../libs/dto/blog.dto';
 import { ErrorResponse } from '../../libs/errors/error.response';
@@ -40,7 +48,7 @@ export class BlogsController {
         image: {
           type: 'string',
           format: 'binary',
-          description: 'Le fichier image pour l\'article de blog.',
+          description: "Le fichier image pour l'article de blog.",
         },
       },
     },
@@ -56,10 +64,30 @@ export class BlogsController {
   @Get()
   @ApiOperation({ summary: 'Get all blog posts' })
   @ApiQuery({ name: 'q', required: false, description: 'Search query string' })
-  @ApiQuery({ name: 'order_by', required: false, enum: ['title', 'createdAt'], description: 'Sort by title or creation date' })
-  @ApiQuery({ name: 'order_dir', required: false, enum: ['asc', 'desc'], description: 'Sort direction' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Limit number of results', type: Number })
-  @ApiQuery({ name: 'offset', required: false, description: 'Offset for pagination', type: Number })
+  @ApiQuery({
+    name: 'order_by',
+    required: false,
+    enum: ['title', 'createdAt'],
+    description: 'Sort by title or creation date',
+  })
+  @ApiQuery({
+    name: 'order_dir',
+    required: false,
+    enum: ['asc', 'desc'],
+    description: 'Sort direction',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Limit number of results',
+    type: Number,
+  })
+  @ApiQuery({
+    name: 'offset',
+    required: false,
+    description: 'Offset for pagination',
+    type: Number,
+  })
   @ApiResponse({ status: 200, description: 'List of blog posts' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   findAll(@Query() searchDto: SearchDto) {
@@ -70,7 +98,11 @@ export class BlogsController {
   @ApiOperation({ summary: 'Get a blog post by ID' })
   @ApiParam({ name: 'id', description: 'Blog post ID' })
   @ApiResponse({ status: 200, description: 'Blog post found' })
-  @ApiResponse({ status: 404, description: 'Blog post not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Blog post not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   findOne(@Param('id') id: string) {
     return this.blogsService.findOne(+id);
@@ -80,11 +112,16 @@ export class BlogsController {
   @ApiOperation({ summary: 'Update a blog post' })
   @ApiParam({ name: 'id', description: 'Blog post ID' })
   @ApiResponse({ status: 200, description: 'Blog post updated successfully' })
-  @ApiResponse({ status: 404, description: 'Blog post not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Blog post not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   @ApiConsumes('multipart/form-data')
   @ApiBody({
-    description: 'Données pour mettre à jour un article. Tous les champs sont optionnels.',
+    description:
+      'Données pour mettre à jour un article. Tous les champs sont optionnels.',
     schema: {
       type: 'object',
       properties: {
@@ -96,7 +133,8 @@ export class BlogsController {
         image: {
           type: 'string',
           format: 'binary',
-          description: 'Un nouveau fichier image pour remplacer l\'ancien (optionnel).',
+          description:
+            "Un nouveau fichier image pour remplacer l'ancien (optionnel).",
         },
       },
     },
@@ -114,7 +152,11 @@ export class BlogsController {
   @ApiOperation({ summary: 'Delete a blog post' })
   @ApiParam({ name: 'id', description: 'Blog post ID' })
   @ApiResponse({ status: 200, description: 'Blog post deleted successfully' })
-  @ApiResponse({ status: 404, description: 'Blog post not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Blog post not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   remove(@Param('id') id: string) {
     return this.blogsService.remove(+id);

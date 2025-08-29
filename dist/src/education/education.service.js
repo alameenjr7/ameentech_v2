@@ -73,7 +73,8 @@ let EducationService = class EducationService {
             return education;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Error retrieving education entry');

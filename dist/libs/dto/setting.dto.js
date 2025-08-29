@@ -19,7 +19,7 @@ exports.CreateSettingDto = CreateSettingDto;
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'The title of the setting',
-        example: 'AmeenTECH'
+        example: 'AmeenTECH',
     }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
@@ -28,7 +28,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'The phone number of the setting',
-        example: '+221772050626'
+        example: '+221772050626',
     }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
@@ -37,7 +37,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'The email of the setting',
-        example: 'info@ameenaltech.com'
+        example: 'info@ameenaltech.com',
     }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
@@ -46,7 +46,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiProperty)({
         description: 'The address of the setting',
-        example: 'Dakar, Sénégal'
+        example: 'Dakar, Sénégal',
     }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
@@ -55,7 +55,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'The meta description of the setting',
-        example: 'AmeenTECH is a technology company that provides services to businesses.'
+        example: 'AmeenTECH is a technology company that provides services to businesses.',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -64,7 +64,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'The meta keywords of the setting',
-        example: 'AmeenTECH, technology, services'
+        example: 'AmeenTECH, technology, services',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -73,7 +73,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'The slogan of the setting',
-        example: 'AmeenTECH is a technology company that provides services to businesses.'
+        example: 'AmeenTECH is a technology company that provides services to businesses.',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -82,7 +82,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Primary color of the setting',
-        example: '#000000'
+        example: '#000000',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -91,7 +91,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Secondary color of the setting',
-        example: '#000000'
+        example: '#000000',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -100,7 +100,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Tertiary color of the setting',
-        example: '#000000'
+        example: '#000000',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -109,7 +109,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Facebook URL of the setting',
-        example: 'https://www.facebook.com/ameentechnology'
+        example: 'https://www.facebook.com/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -118,7 +118,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Instagram URL of the setting',
-        example: 'https://www.instagram.com/ameentechnology'
+        example: 'https://www.instagram.com/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -127,7 +127,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Twitter URL of the setting',
-        example: 'https://www.twitter.com/ameentechnology'
+        example: 'https://www.twitter.com/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -136,7 +136,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'LinkedIn URL of the setting',
-        example: 'https://www.linkedin.com/ameentechnology'
+        example: 'https://www.linkedin.com/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -145,7 +145,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'WhatsApp URL of the setting',
-        example: 'https://www.whatsapp.com/ameentechnology'
+        example: 'https://www.whatsapp.com/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -154,7 +154,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Telegram URL of the setting',
-        example: 'https://www.telegram.org/ameentechnology'
+        example: 'https://www.telegram.org/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -163,7 +163,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'YouTube URL of the setting',
-        example: 'https://www.youtube.com/ameentechnology'
+        example: 'https://www.youtube.com/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -172,7 +172,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'TikTok URL of the setting',
-        example: 'https://www.tiktok.com/ameentechnology'
+        example: 'https://www.tiktok.com/ameentechnology',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -181,21 +181,27 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Domain URL of the setting',
-        example: 'https://www.ameenaltech.com/'
+        example: 'https://www.ameenaltech.com/',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateSettingDto.prototype, "domain", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de création', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de création',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateSettingDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de mise à jour',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
@@ -204,7 +210,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'The timezone of the setting',
-        example: 'UTC'
+        example: 'UTC',
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
@@ -213,7 +219,7 @@ __decorate([
 __decorate([
     (0, swagger_1.ApiPropertyOptional)({
         description: 'Whether the setting is active',
-        example: true
+        example: true,
     }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsBoolean)(),

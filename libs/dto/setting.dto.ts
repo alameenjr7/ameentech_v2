@@ -1,11 +1,17 @@
-import { IsNotEmpty, IsOptional, IsString, IsBoolean, IsDate } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsBoolean,
+  IsDate,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 export class CreateSettingDto {
   @ApiProperty({
     description: 'The title of the setting',
-    example: 'AmeenTECH'
+    example: 'AmeenTECH',
   })
   @IsNotEmpty()
   @IsString()
@@ -13,7 +19,7 @@ export class CreateSettingDto {
 
   @ApiProperty({
     description: 'The phone number of the setting',
-    example: '+221772050626'
+    example: '+221772050626',
   })
   @IsNotEmpty()
   @IsString()
@@ -21,7 +27,7 @@ export class CreateSettingDto {
 
   @ApiProperty({
     description: 'The email of the setting',
-    example: 'info@ameenaltech.com'
+    example: 'info@ameenaltech.com',
   })
   @IsNotEmpty()
   @IsString()
@@ -29,7 +35,7 @@ export class CreateSettingDto {
 
   @ApiProperty({
     description: 'The address of the setting',
-    example: 'Dakar, Sénégal'
+    example: 'Dakar, Sénégal',
   })
   @IsNotEmpty()
   @IsString()
@@ -37,7 +43,8 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'The meta description of the setting',
-    example: 'AmeenTECH is a technology company that provides services to businesses.'
+    example:
+      'AmeenTECH is a technology company that provides services to businesses.',
   })
   @IsOptional()
   @IsString()
@@ -45,7 +52,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'The meta keywords of the setting',
-    example: 'AmeenTECH, technology, services'
+    example: 'AmeenTECH, technology, services',
   })
   @IsOptional()
   @IsString()
@@ -53,7 +60,8 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'The slogan of the setting',
-    example: 'AmeenTECH is a technology company that provides services to businesses.'
+    example:
+      'AmeenTECH is a technology company that provides services to businesses.',
   })
   @IsOptional()
   @IsString()
@@ -61,7 +69,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Primary color of the setting',
-    example: '#000000'
+    example: '#000000',
   })
   @IsOptional()
   @IsString()
@@ -69,7 +77,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Secondary color of the setting',
-    example: '#000000'
+    example: '#000000',
   })
   @IsOptional()
   @IsString()
@@ -77,7 +85,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Tertiary color of the setting',
-    example: '#000000'
+    example: '#000000',
   })
   @IsOptional()
   @IsString()
@@ -85,7 +93,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Facebook URL of the setting',
-    example: 'https://www.facebook.com/ameentechnology'
+    example: 'https://www.facebook.com/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -93,7 +101,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Instagram URL of the setting',
-    example: 'https://www.instagram.com/ameentechnology'
+    example: 'https://www.instagram.com/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -101,7 +109,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Twitter URL of the setting',
-    example: 'https://www.twitter.com/ameentechnology'
+    example: 'https://www.twitter.com/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -109,7 +117,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'LinkedIn URL of the setting',
-    example: 'https://www.linkedin.com/ameentechnology'
+    example: 'https://www.linkedin.com/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -117,7 +125,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'WhatsApp URL of the setting',
-    example: 'https://www.whatsapp.com/ameentechnology'
+    example: 'https://www.whatsapp.com/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -125,7 +133,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Telegram URL of the setting',
-    example: 'https://www.telegram.org/ameentechnology'
+    example: 'https://www.telegram.org/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -133,7 +141,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'YouTube URL of the setting',
-    example: 'https://www.youtube.com/ameentechnology'
+    example: 'https://www.youtube.com/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -141,7 +149,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'TikTok URL of the setting',
-    example: 'https://www.tiktok.com/ameentechnology'
+    example: 'https://www.tiktok.com/ameentechnology',
   })
   @IsOptional()
   @IsString()
@@ -149,19 +157,25 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Domain URL of the setting',
-    example: 'https://www.ameenaltech.com/'
+    example: 'https://www.ameenaltech.com/',
   })
   @IsOptional()
   @IsString()
   domain?: string;
 
-  @ApiPropertyOptional({ description: 'Date de création', example: '2024-05-01T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de création',
+    example: '2024-05-01T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)
   createdAt?: Date;
 
-  @ApiPropertyOptional({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de mise à jour',
+    example: '2024-05-02T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)
@@ -169,7 +183,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'The timezone of the setting',
-    example: 'UTC'
+    example: 'UTC',
   })
   @IsOptional()
   @IsString()
@@ -177,7 +191,7 @@ export class CreateSettingDto {
 
   @ApiPropertyOptional({
     description: 'Whether the setting is active',
-    example: true
+    example: true,
   })
   @IsOptional()
   @IsBoolean()

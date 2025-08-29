@@ -70,7 +70,10 @@ __decorate([
 __decorate([
     (0, common_1.Get)('active'),
     (0, swagger_1.ApiOperation)({ summary: 'Get active services' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Active services retrieved successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Active services retrieved successfully',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
@@ -80,7 +83,11 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Get a service by ID' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Service retrieved successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Service not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Service not found',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -91,7 +98,11 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update a service' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Service updated successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Service not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Service not found',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -101,9 +112,16 @@ __decorate([
 __decorate([
     (0, common_1.Put)(':id/toggle'),
     (0, swagger_1.ApiOperation)({ summary: 'Toggle service active status' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Service active status toggled successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Service active status toggled successfully',
+    }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Service not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Service not found',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -114,7 +132,11 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete a service' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Service deleted successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Service not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Service not found',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

@@ -34,10 +34,7 @@ let FaqsService = class FaqsService {
         const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
         const where = {};
         if (q) {
-            where.OR = [
-                { question: { contains: q } },
-                { answer: { contains: q } },
-            ];
+            where.OR = [{ question: { contains: q } }, { answer: { contains: q } }];
         }
         const orderBy = {};
         if (order_by === 'question') {
@@ -72,7 +69,8 @@ let FaqsService = class FaqsService {
             return faq;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Error retrieving FAQ');

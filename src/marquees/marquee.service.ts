@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { SearchDto } from '../../libs/global/search.dto';
 import { CreateMarqueeDto, UpdateMarqueeDto } from 'libs/dto/marquee.dto';
@@ -34,10 +38,7 @@ export class MarqueesService {
     const where: any = {};
 
     if (q) {
-      where.OR = [
-        { question: { contains: q } },
-        { answer: { contains: q } },
-      ];
+      where.OR = [{ question: { contains: q } }, { answer: { contains: q } }];
     }
 
     const orderBy: any = {};
@@ -75,7 +76,10 @@ export class MarqueesService {
 
       return Marquee;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
       throw new BadRequestException('Error retrieving Marquee');

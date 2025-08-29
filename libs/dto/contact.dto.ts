@@ -1,11 +1,17 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsString, IsDate } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+  IsDate,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
 export class CreateContactDto {
   @ApiProperty({
     description: 'The name of the contact',
-    example: 'John Doe'
+    example: 'John Doe',
   })
   @IsNotEmpty()
   @IsString()
@@ -13,7 +19,7 @@ export class CreateContactDto {
 
   @ApiProperty({
     description: 'The email address of the contact',
-    example: 'john.doe@example.com'
+    example: 'john.doe@example.com',
   })
   @IsNotEmpty()
   @IsEmail()
@@ -21,7 +27,7 @@ export class CreateContactDto {
 
   @ApiPropertyOptional({
     description: 'The phone number of the contact',
-    example: '+1234567890'
+    example: '+1234567890',
   })
   @IsOptional()
   @IsString()
@@ -29,7 +35,7 @@ export class CreateContactDto {
 
   @ApiPropertyOptional({
     description: 'The interest of the contact',
-    example: 'Web Development'
+    example: 'Web Development',
   })
   @IsOptional()
   @IsString()
@@ -37,7 +43,7 @@ export class CreateContactDto {
 
   @ApiPropertyOptional({
     description: 'The budget of the contact',
-    example: '1000-2000$'
+    example: '1000-2000$',
   })
   @IsOptional()
   @IsString()
@@ -45,7 +51,7 @@ export class CreateContactDto {
 
   @ApiPropertyOptional({
     description: 'The country of the contact',
-    example: 'USA'
+    example: 'USA',
   })
   @IsOptional()
   @IsString()
@@ -53,7 +59,7 @@ export class CreateContactDto {
 
   @ApiProperty({
     description: 'The message from the contact',
-    example: 'I would like to discuss a project.'
+    example: 'I would like to discuss a project.',
   })
   @IsNotEmpty()
   @IsString()
@@ -61,19 +67,25 @@ export class CreateContactDto {
 
   @ApiPropertyOptional({
     description: 'The status of the contact',
-    example: 'new'
+    example: 'new',
   })
   @IsOptional()
   @IsString()
   status?: string;
 
-  @ApiPropertyOptional({ description: 'Date de création', example: '2024-05-01T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de création',
+    example: '2024-05-01T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)
   createdAt?: Date;
 
-  @ApiPropertyOptional({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Date de mise à jour',
+    example: '2024-05-02T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)

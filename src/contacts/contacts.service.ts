@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateContactDto, UpdateContactDto } from '../../libs/dto/contact.dto';
 import { SearchDto } from '../../libs/global/search.dto';
@@ -58,7 +62,9 @@ export class ContactsService {
         skip: offset,
       });
     } catch (error) {
-      throw new BadRequestException('Erreur lors de la récupération des contacts');
+      throw new BadRequestException(
+        'Erreur lors de la récupération des contacts',
+      );
     }
   }
 
@@ -78,10 +84,15 @@ export class ContactsService {
 
       return contact;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
-      throw new BadRequestException('Erreur lors de la récupération du contact');
+      throw new BadRequestException(
+        'Erreur lors de la récupération du contact',
+      );
     }
   }
 
@@ -130,11 +141,11 @@ export class ContactsService {
 
     try {
       return await this.prisma.contact.findMany({
-      where: { 
-        email: {
-          contains: email
-        }
-      },
+        where: {
+          email: {
+            contains: email,
+          },
+        },
         orderBy: {
           createdAt: 'desc',
         },
@@ -151,11 +162,11 @@ export class ContactsService {
 
     try {
       return await this.prisma.contact.findMany({
-      where: { 
-        interest: {
-          contains: interest
-        }
-      },
+        where: {
+          interest: {
+            contains: interest,
+          },
+        },
         orderBy: {
           createdAt: 'desc',
         },
@@ -196,7 +207,9 @@ export class ContactsService {
         processed: processedContacts,
       };
     } catch (error) {
-      throw new BadRequestException('Erreur lors de la récupération des statistiques');
+      throw new BadRequestException(
+        'Erreur lors de la récupération des statistiques',
+      );
     }
   }
 }

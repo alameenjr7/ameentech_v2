@@ -17,13 +17,19 @@ class CreateWorkExperienceDto {
 }
 exports.CreateWorkExperienceDto = CreateWorkExperienceDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The period of work experience', example: '2022-Present' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The period of work experience',
+        example: '2022-Present',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateWorkExperienceDto.prototype, "period", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The company of work experience', example: 'Example Inc.' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The company of work experience',
+        example: 'Example Inc.',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -35,14 +41,20 @@ __decorate([
     __metadata("design:type", String)
 ], CreateWorkExperienceDto.prototype, "role", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Creation date', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Creation date',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateWorkExperienceDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Update date', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Update date',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

@@ -23,26 +23,38 @@ __decorate([
     __metadata("design:type", String)
 ], CreateEducationDto.prototype, "period", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The institution of education', example: 'University of Example' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The institution of education',
+        example: 'University of Example',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEducationDto.prototype, "institution", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'The degree obtained', example: 'Bachelor of Science in Computer Science' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'The degree obtained',
+        example: 'Bachelor of Science in Computer Science',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateEducationDto.prototype, "degree", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Creation date', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Creation date',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateEducationDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Update date', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Update date',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

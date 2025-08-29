@@ -32,10 +32,14 @@ let ProjectsService = class ProjectsService {
             if (file && file.buffer) {
                 dataToCreate.image = await this.sharpService.resizeImage(file.buffer, file.originalname);
             }
-            const newProject = await this.prisma.project.create({ data: dataToCreate });
+            const newProject = await this.prisma.project.create({
+                data: dataToCreate,
+            });
             return {
                 ...newProject,
-                technologies: newProject.technologies ? JSON.parse(newProject.technologies) : [],
+                technologies: newProject.technologies
+                    ? JSON.parse(newProject.technologies)
+                    : [],
                 tags: newProject.tags ? JSON.parse(newProject.tags) : [],
             };
         }
@@ -47,10 +51,7 @@ let ProjectsService = class ProjectsService {
         const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
         const where = {};
         if (q) {
-            where.OR = [
-                { title: { contains: q } },
-                { description: { contains: q } },
-            ];
+            where.OR = [{ title: { contains: q } }, { description: { contains: q } }];
         }
         const orderBy = {};
         if (order_by === 'title') {
@@ -66,9 +67,11 @@ let ProjectsService = class ProjectsService {
                 take: limit,
                 skip: offset,
             });
-            return projects.map(project => ({
+            return projects.map((project) => ({
                 ...project,
-                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                technologies: project.technologies
+                    ? JSON.parse(project.technologies)
+                    : [],
                 tags: project.tags ? JSON.parse(project.tags) : [],
             }));
         }
@@ -80,14 +83,13 @@ let ProjectsService = class ProjectsService {
         try {
             const projects = await this.prisma.project.findMany({
                 where: { isActive: true },
-                orderBy: [
-                    { order: 'asc' },
-                    { createdAt: 'desc' },
-                ],
+                orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
             });
-            return projects.map(project => ({
+            return projects.map((project) => ({
                 ...project,
-                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                technologies: project.technologies
+                    ? JSON.parse(project.technologies)
+                    : [],
                 tags: project.tags ? JSON.parse(project.tags) : [],
             }));
         }
@@ -108,12 +110,15 @@ let ProjectsService = class ProjectsService {
             }
             return {
                 ...project,
-                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                technologies: project.technologies
+                    ? JSON.parse(project.technologies)
+                    : [],
                 tags: project.tags ? JSON.parse(project.tags) : [],
             };
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Erreur lors de la récupération du projet');
@@ -150,7 +155,9 @@ let ProjectsService = class ProjectsService {
             });
             return {
                 ...updatedProject,
-                technologies: updatedProject.technologies ? JSON.parse(updatedProject.technologies) : [],
+                technologies: updatedProject.technologies
+                    ? JSON.parse(updatedProject.technologies)
+                    : [],
                 tags: updatedProject.tags ? JSON.parse(updatedProject.tags) : [],
             };
         }
@@ -188,12 +195,15 @@ let ProjectsService = class ProjectsService {
             });
             return {
                 ...updatedProject,
-                technologies: updatedProject.technologies ? JSON.parse(updatedProject.technologies) : [],
+                technologies: updatedProject.technologies
+                    ? JSON.parse(updatedProject.technologies)
+                    : [],
                 tags: updatedProject.tags ? JSON.parse(updatedProject.tags) : [],
             };
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Erreur lors de la mise à jour du statut actif du projet');
@@ -211,14 +221,13 @@ let ProjectsService = class ProjectsService {
                     },
                     isActive: true,
                 },
-                orderBy: [
-                    { order: 'asc' },
-                    { createdAt: 'desc' },
-                ],
+                orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
             });
-            return projects.map(project => ({
+            return projects.map((project) => ({
                 ...project,
-                technologies: project.technologies ? JSON.parse(project.technologies) : [],
+                technologies: project.technologies
+                    ? JSON.parse(project.technologies)
+                    : [],
                 tags: project.tags ? JSON.parse(project.tags) : [],
             }));
         }

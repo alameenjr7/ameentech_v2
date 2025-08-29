@@ -40,10 +40,7 @@ let AboutService = class AboutService {
         const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
         const where = {};
         if (q) {
-            where.OR = [
-                { title: { contains: q } },
-                { stats: { contains: q } },
-            ];
+            where.OR = [{ title: { contains: q } }, { stats: { contains: q } }];
         }
         const orderBy = {};
         if (order_by === 'title') {
@@ -80,7 +77,9 @@ let AboutService = class AboutService {
             throw new common_1.NotFoundException('About not found');
         const updateData = {
             ...data,
-            paragraphs: data.paragraphs ? JSON.stringify(data.paragraphs) : about.paragraphs,
+            paragraphs: data.paragraphs
+                ? JSON.stringify(data.paragraphs)
+                : about.paragraphs,
             stats: data.stats ? JSON.stringify(data.stats) : about.stats,
         };
         if (file && file.buffer) {
@@ -95,7 +94,10 @@ let AboutService = class AboutService {
                 }
             }
         }
-        const updated = await this.prisma.about.update({ where: { id }, data: updateData });
+        const updated = await this.prisma.about.update({
+            where: { id },
+            data: updateData,
+        });
         return {
             ...updated,
             paragraphs: JSON.parse(updated.paragraphs),

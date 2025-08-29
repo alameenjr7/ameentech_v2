@@ -34,10 +34,7 @@ let ServicesService = class ServicesService {
         const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
         const where = {};
         if (q) {
-            where.OR = [
-                { title: { contains: q } },
-                { description: { contains: q } },
-            ];
+            where.OR = [{ title: { contains: q } }, { description: { contains: q } }];
         }
         const orderBy = {};
         if (order_by === 'title') {
@@ -62,10 +59,7 @@ let ServicesService = class ServicesService {
         try {
             return await this.prisma.service.findMany({
                 where: { isActive: true },
-                orderBy: [
-                    { order: 'asc' },
-                    { createdAt: 'desc' },
-                ],
+                orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
             });
         }
         catch (error) {
@@ -86,7 +80,8 @@ let ServicesService = class ServicesService {
             return service;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Erreur lors de la récupération du service');
@@ -140,7 +135,8 @@ let ServicesService = class ServicesService {
             return updatedService;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Erreur lors de la mise à jour du statut actif du service');

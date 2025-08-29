@@ -39,7 +39,10 @@ export class ServicesController {
 
   @Get('active')
   @ApiOperation({ summary: 'Get active services' })
-  @ApiResponse({ status: 200, description: 'Active services retrieved successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Active services retrieved successfully',
+  })
   findActive() {
     return this.servicesService.findActive();
   }
@@ -48,7 +51,11 @@ export class ServicesController {
   @ApiOperation({ summary: 'Get a service by ID' })
   @ApiResponse({ status: 200, description: 'Service retrieved successfully' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Service not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Service not found',
+    type: ErrorResponse,
+  })
   findOne(@Param('id') id: string) {
     return this.servicesService.findOne(+id);
   }
@@ -57,16 +64,27 @@ export class ServicesController {
   @ApiOperation({ summary: 'Update a service' })
   @ApiResponse({ status: 200, description: 'Service updated successfully' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Service not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Service not found',
+    type: ErrorResponse,
+  })
   update(@Param('id') id: string, @Body() updateServiceDto: UpdateServiceDto) {
     return this.servicesService.update(+id, updateServiceDto);
   }
 
   @Put(':id/toggle')
   @ApiOperation({ summary: 'Toggle service active status' })
-  @ApiResponse({ status: 200, description: 'Service active status toggled successfully' })
+  @ApiResponse({
+    status: 200,
+    description: 'Service active status toggled successfully',
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Service not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Service not found',
+    type: ErrorResponse,
+  })
   toggleActive(@Param('id') id: string) {
     return this.servicesService.toggleActive(+id);
   }
@@ -75,7 +93,11 @@ export class ServicesController {
   @ApiOperation({ summary: 'Delete a service' })
   @ApiResponse({ status: 200, description: 'Service deleted successfully' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
-  @ApiResponse({ status: 404, description: 'Service not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Service not found',
+    type: ErrorResponse,
+  })
   remove(@Param('id') id: string) {
     return this.servicesService.remove(+id);
   }

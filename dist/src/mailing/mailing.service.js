@@ -34,9 +34,7 @@ let MailingService = class MailingService {
         const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
         const where = {};
         if (q) {
-            where.OR = [
-                { email: { contains: q } },
-            ];
+            where.OR = [{ email: { contains: q } }];
         }
         const orderBy = {};
         if (order_by === 'email') {
@@ -71,7 +69,8 @@ let MailingService = class MailingService {
             return mailing;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Error retrieving Mailing');

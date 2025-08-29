@@ -1,6 +1,13 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { CreateTestimonialDto, UpdateTestimonialDto } from '../../libs/dto/testimonial.dto';
+import {
+  CreateTestimonialDto,
+  UpdateTestimonialDto,
+} from '../../libs/dto/testimonial.dto';
 import { SearchDto } from '../../libs/global/search.dto';
 import { SharpService } from '../../libs/sharp/sharp.service';
 import { promises as fs } from 'fs';
@@ -13,7 +20,10 @@ export class TestimonialsService {
     private sharpService: SharpService,
   ) {}
 
-  async create(createTestimonialDto: CreateTestimonialDto, file?: Express.Multer.File) {
+  async create(
+    createTestimonialDto: CreateTestimonialDto,
+    file?: Express.Multer.File,
+  ) {
     try {
       const dataToCreate: any = {
         ...createTestimonialDto,
@@ -22,7 +32,10 @@ export class TestimonialsService {
       };
 
       if (file && file.buffer) {
-        dataToCreate.avatar = await this.sharpService.resizeImage(file.buffer, file.originalname);
+        dataToCreate.avatar = await this.sharpService.resizeImage(
+          file.buffer,
+          file.originalname,
+        );
       }
 
       return await this.prisma.testimonials.create({ data: dataToCreate });
@@ -85,14 +98,21 @@ export class TestimonialsService {
 
       return testimonial;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
       throw new BadRequestException('Error retrieving testimonial');
     }
   }
 
-  async update(id: number, updateTestimonialDto: UpdateTestimonialDto, file?: Express.Multer.File) {
+  async update(
+    id: number,
+    updateTestimonialDto: UpdateTestimonialDto,
+    file?: Express.Multer.File,
+  ) {
     if (!id || isNaN(id)) {
       throw new BadRequestException('Invalid ID');
     }
@@ -106,13 +126,19 @@ export class TestimonialsService {
       };
 
       if (file && file.buffer) {
-        dataToUpdate.avatar = await this.sharpService.resizeImage(file.buffer, file.originalname);
+        dataToUpdate.avatar = await this.sharpService.resizeImage(
+          file.buffer,
+          file.originalname,
+        );
         if (testimonial.avatar) {
           try {
             const oldImagePath = sharpConfig.getOutputPath(testimonial.avatar);
             await fs.unlink(oldImagePath);
-          } catch(e) {
-            console.error(`Impossible de supprimer l'ancien avatar: ${testimonial.avatar}`, e);
+          } catch (e) {
+            console.error(
+              `Impossible de supprimer l'ancien avatar: ${testimonial.avatar}`,
+              e,
+            );
           }
         }
       }

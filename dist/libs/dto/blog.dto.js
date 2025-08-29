@@ -17,7 +17,10 @@ class CreateBlogDto {
 }
 exports.CreateBlogDto = CreateBlogDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Category of the blog post', example: 'Technology' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Category of the blog post',
+        example: 'Technology',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -29,32 +32,47 @@ __decorate([
     __metadata("design:type", String)
 ], CreateBlogDto.prototype, "date", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Title of the blog post', example: 'The Future of AI' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Title of the blog post',
+        example: 'The Future of AI',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateBlogDto.prototype, "title", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Excerpt of the blog post', example: 'A brief overview of the future of artificial intelligence.' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Excerpt of the blog post',
+        example: 'A brief overview of the future of artificial intelligence.',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateBlogDto.prototype, "excerpt", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Link to the full blog post', example: 'https://example.com/blog/the-future-of-ai' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Link to the full blog post',
+        example: 'https://example.com/blog/the-future-of-ai',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateBlogDto.prototype, "link", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Creation date', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Creation date',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateBlogDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Update date', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Update date',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

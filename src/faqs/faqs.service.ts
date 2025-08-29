@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateFaqDto, UpdateFaqDto } from '../../libs/dto/faq.dto';
 import { SearchDto } from '../../libs/global/search.dto';
@@ -33,10 +37,7 @@ export class FaqsService {
     const where: any = {};
 
     if (q) {
-      where.OR = [
-        { question: { contains: q } },
-        { answer: { contains: q } },
-      ];
+      where.OR = [{ question: { contains: q } }, { answer: { contains: q } }];
     }
 
     const orderBy: any = {};
@@ -74,7 +75,10 @@ export class FaqsService {
 
       return faq;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
       throw new BadRequestException('Error retrieving FAQ');

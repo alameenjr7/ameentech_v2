@@ -14,7 +14,9 @@ export class SharpService {
 
     await sharp(buffer)
       .resize(sharpConfig.resize.width, sharpConfig.resize.height)
-      .toFormat(sharpConfig.resize.format, { quality: sharpConfig.resize.quality })
+      .toFormat(sharpConfig.resize.format, {
+        quality: sharpConfig.resize.quality,
+      })
       .toFile(outputPath);
 
     return newFilename;

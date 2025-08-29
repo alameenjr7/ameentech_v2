@@ -8,7 +8,13 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { FaqsService } from './faqs.service';
 import { CreateFaqDto, UpdateFaqDto } from '../../libs/dto/faq.dto';
 import { ErrorResponse } from '../../libs/errors/error.response';
@@ -30,10 +36,30 @@ export class FaqsController {
   @Get()
   @ApiOperation({ summary: 'Get all FAQs' })
   @ApiQuery({ name: 'q', required: false, description: 'Search query string' })
-  @ApiQuery({ name: 'order_by', required: false, enum: ['question', 'createdAt'], description: 'Sort by question or creation date' })
-  @ApiQuery({ name: 'order_dir', required: false, enum: ['asc', 'desc'], description: 'Sort direction' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Limit number of results', type: Number })
-  @ApiQuery({ name: 'offset', required: false, description: 'Offset for pagination', type: Number })
+  @ApiQuery({
+    name: 'order_by',
+    required: false,
+    enum: ['question', 'createdAt'],
+    description: 'Sort by question or creation date',
+  })
+  @ApiQuery({
+    name: 'order_dir',
+    required: false,
+    enum: ['asc', 'desc'],
+    description: 'Sort direction',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Limit number of results',
+    type: Number,
+  })
+  @ApiQuery({
+    name: 'offset',
+    required: false,
+    description: 'Offset for pagination',
+    type: Number,
+  })
   @ApiResponse({ status: 200, description: 'List of FAQs' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   findAll(@Query() searchDto: SearchDto) {
@@ -44,7 +70,11 @@ export class FaqsController {
   @ApiOperation({ summary: 'Get a FAQ by ID' })
   @ApiParam({ name: 'id', description: 'FAQ ID' })
   @ApiResponse({ status: 200, description: 'FAQ found' })
-  @ApiResponse({ status: 404, description: 'FAQ not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'FAQ not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   findOne(@Param('id') id: string) {
     return this.faqsService.findOne(+id);
@@ -54,7 +84,11 @@ export class FaqsController {
   @ApiOperation({ summary: 'Update a FAQ' })
   @ApiParam({ name: 'id', description: 'FAQ ID' })
   @ApiResponse({ status: 200, description: 'FAQ updated successfully' })
-  @ApiResponse({ status: 404, description: 'FAQ not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'FAQ not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   update(@Param('id') id: string, @Body() updateFaqDto: UpdateFaqDto) {
     return this.faqsService.update(+id, updateFaqDto);
@@ -64,7 +98,11 @@ export class FaqsController {
   @ApiOperation({ summary: 'Delete a FAQ' })
   @ApiParam({ name: 'id', description: 'FAQ ID' })
   @ApiResponse({ status: 200, description: 'FAQ deleted successfully' })
-  @ApiResponse({ status: 404, description: 'FAQ not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'FAQ not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   remove(@Param('id') id: string) {
     return this.faqsService.remove(+id);

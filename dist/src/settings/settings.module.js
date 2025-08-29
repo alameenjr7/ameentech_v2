@@ -19,7 +19,7 @@ exports.SettingsModule = SettingsModule = __decorate([
     (0, common_1.Module)({
         imports: [prisma_module_1.PrismaModule, sharp_module_1.SharpModule],
         controllers: [settings_controller_1.SettingsController],
-        providers: [settings_service_1.SettingsService]
+        providers: [settings_service_1.SettingsService],
     })
 ], SettingsModule);
 //# sourceMappingURL=settings.module.js.map

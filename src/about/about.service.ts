@@ -1,4 +1,8 @@
-import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { AboutDto, UpdateAboutDto } from '../../libs/dto/about.dto';
 import { SearchDto } from 'libs/global/search.dto';
@@ -21,7 +25,10 @@ export class AboutService {
     };
 
     if (file && file.buffer) {
-      createData.imageUrl = await this.sharpService.resizeImage(file.buffer, file.originalname);
+      createData.imageUrl = await this.sharpService.resizeImage(
+        file.buffer,
+        file.originalname,
+      );
     }
 
     const created = await this.prisma.about.create({ data: createData });
@@ -32,42 +39,39 @@ export class AboutService {
     };
   }
 
-    async findAll(searchDto?: SearchDto) {
-      const {
-        q,
-        order_by = 'createdAt',
-        order_dir = 'desc',
-        limit,
-        offset,
-      } = searchDto || {};
-  
-      const where: any = {};
-  
-      if (q) {
-        where.OR = [
-          { title: { contains: q } },
-          { stats: { contains: q } },
-        ];
-      }
-  
-      const orderBy: any = {};
-      if (order_by === 'title') {
-        orderBy.title = order_dir;
-      } else {
-        orderBy.createdAt = order_dir;
-      }
-  
-      try {
-        return await this.prisma.about.findMany({
-          where,
-          orderBy,
-          take: limit,
-          skip: offset,
-        });
-      } catch (error) {
-        throw new BadRequestException('Error retrieving About');
-      }
+  async findAll(searchDto?: SearchDto) {
+    const {
+      q,
+      order_by = 'createdAt',
+      order_dir = 'desc',
+      limit,
+      offset,
+    } = searchDto || {};
+
+    const where: any = {};
+
+    if (q) {
+      where.OR = [{ title: { contains: q } }, { stats: { contains: q } }];
     }
+
+    const orderBy: any = {};
+    if (order_by === 'title') {
+      orderBy.title = order_dir;
+    } else {
+      orderBy.createdAt = order_dir;
+    }
+
+    try {
+      return await this.prisma.about.findMany({
+        where,
+        orderBy,
+        take: limit,
+        skip: offset,
+      });
+    } catch (error) {
+      throw new BadRequestException('Error retrieving About');
+    }
+  }
 
   async findOne(id: number) {
     const about = await this.prisma.about.findUnique({ where: { id } });
@@ -85,23 +89,34 @@ export class AboutService {
 
     const updateData: any = {
       ...data,
-      paragraphs: data.paragraphs ? JSON.stringify(data.paragraphs) : about.paragraphs,
+      paragraphs: data.paragraphs
+        ? JSON.stringify(data.paragraphs)
+        : about.paragraphs,
       stats: data.stats ? JSON.stringify(data.stats) : about.stats,
     };
 
     if (file && file.buffer) {
-      updateData.imageUrl = await this.sharpService.resizeImage(file.buffer, file.originalname);
+      updateData.imageUrl = await this.sharpService.resizeImage(
+        file.buffer,
+        file.originalname,
+      );
       if (about.imageUrl) {
         try {
           const oldImagePath = sharpConfig.getOutputPath(about.imageUrl);
           await fs.unlink(oldImagePath);
         } catch (error) {
-          console.error(`Impossible de supprimer l'ancienne image : ${about.imageUrl}`, error);
+          console.error(
+            `Impossible de supprimer l'ancienne image : ${about.imageUrl}`,
+            error,
+          );
         }
       }
     }
 
-    const updated = await this.prisma.about.update({ where: { id }, data: updateData });
+    const updated = await this.prisma.about.update({
+      where: { id },
+      data: updateData,
+    });
     return {
       ...updated,
       paragraphs: JSON.parse(updated.paragraphs),

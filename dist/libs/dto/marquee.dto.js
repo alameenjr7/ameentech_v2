@@ -17,20 +17,29 @@ class CreateMarqueeDto {
 }
 exports.CreateMarqueeDto = CreateMarqueeDto;
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Items for the marquee (JSON string)', example: '["Item 1", "Item 2"]' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Items for the marquee (JSON string)',
+        example: '["Item 1", "Item 2"]',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateMarqueeDto.prototype, "items", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Creation date', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Creation date',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateMarqueeDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Update date', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Update date',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

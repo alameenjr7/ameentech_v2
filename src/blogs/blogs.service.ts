@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateBlogDto, UpdateBlogDto } from '../../libs/dto/blog.dto';
 import { SearchDto } from '../../libs/global/search.dto';
@@ -13,13 +17,16 @@ export class BlogsService {
     private sharpService: SharpService,
   ) {}
 
-    async create(createBlogDto: CreateBlogDto, file?: Express.Multer.File) {
+  async create(createBlogDto: CreateBlogDto, file?: Express.Multer.File) {
     try {
       let imageFilename: string | null = null;
 
       if (file && file.buffer) {
         // On passe le buffer et le nom original au service
-        imageFilename = await this.sharpService.resizeImage(file.buffer, file.originalname);
+        imageFilename = await this.sharpService.resizeImage(
+          file.buffer,
+          file.originalname,
+        );
       }
 
       return await this.prisma.blogs.create({
@@ -90,14 +97,21 @@ export class BlogsService {
 
       return blog;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
       throw new BadRequestException('Error retrieving blog post');
     }
   }
 
-  async update(id: number, updateBlogDto: UpdateBlogDto, file?: Express.Multer.File) {
+  async update(
+    id: number,
+    updateBlogDto: UpdateBlogDto,
+    file?: Express.Multer.File,
+  ) {
     if (!id || isNaN(id)) {
       throw new BadRequestException('Invalid ID');
     }
@@ -108,7 +122,10 @@ export class BlogsService {
 
     if (file && file.buffer) {
       // 1. Traiter la nouvelle image
-      dataToUpdate.image = await this.sharpService.resizeImage(file.buffer, file.originalname);
+      dataToUpdate.image = await this.sharpService.resizeImage(
+        file.buffer,
+        file.originalname,
+      );
 
       // 2. Supprimer l'ancienne image si elle existe
       if (blogPost.image) {
@@ -117,7 +134,10 @@ export class BlogsService {
           await fs.unlink(oldImagePath);
         } catch (error) {
           // Ne pas bloquer la requête si la suppression échoue (ex: fichier déjà supprimé)
-          console.error(`Impossible de supprimer l'ancienne image : ${blogPost.image}`, error);
+          console.error(
+            `Impossible de supprimer l'ancienne image : ${blogPost.image}`,
+            error,
+          );
         }
       }
     }

@@ -22,8 +22,17 @@ let SettingsService = class SettingsService {
     }
     async create(data, files = {}) {
         try {
-            const dataToCreate = { ...data, createdAt: new Date(), updatedAt: new Date() };
-            const fileFields = ['logo', 'logo_2', 'favicon', 'meta_image'];
+            const dataToCreate = {
+                ...data,
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            };
+            const fileFields = [
+                'logo',
+                'logo_2',
+                'favicon',
+                'meta_image',
+            ];
             for (const field of fileFields) {
                 const file = files[field]?.[0];
                 if (file) {
@@ -40,10 +49,7 @@ let SettingsService = class SettingsService {
         const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
         const where = {};
         if (q) {
-            where.OR = [
-                { title: { contains: q } },
-                { description: { contains: q } },
-            ];
+            where.OR = [{ title: { contains: q } }, { description: { contains: q } }];
         }
         const orderBy = {};
         if (order_by === 'title') {
@@ -75,7 +81,8 @@ let SettingsService = class SettingsService {
             return setting;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Erreur lors de la récupération du paramètre');
@@ -88,7 +95,12 @@ let SettingsService = class SettingsService {
         const setting = await this.findOne(id);
         try {
             const dataToUpdate = { ...data, updatedAt: new Date() };
-            const fileFields = ['logo', 'logo_2', 'favicon', 'meta_image'];
+            const fileFields = [
+                'logo',
+                'logo_2',
+                'favicon',
+                'meta_image',
+            ];
             for (const field of fileFields) {
                 const file = files[field]?.[0];
                 if (file) {
@@ -104,7 +116,10 @@ let SettingsService = class SettingsService {
                     }
                 }
             }
-            return await this.prisma.setting.update({ where: { id }, data: dataToUpdate });
+            return await this.prisma.setting.update({
+                where: { id },
+                data: dataToUpdate,
+            });
         }
         catch (error) {
             throw new common_1.BadRequestException('Erreur lors de la mise à jour du paramètre');

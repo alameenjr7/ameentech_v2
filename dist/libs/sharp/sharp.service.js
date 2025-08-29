@@ -22,7 +22,9 @@ let SharpService = class SharpService {
         const outputPath = sharp_config_1.sharpConfig.getOutputPath(newFilename);
         await (0, sharp_1.default)(buffer)
             .resize(sharp_config_1.sharpConfig.resize.width, sharp_config_1.sharpConfig.resize.height)
-            .toFormat(sharp_config_1.sharpConfig.resize.format, { quality: sharp_config_1.sharpConfig.resize.quality })
+            .toFormat(sharp_config_1.sharpConfig.resize.format, {
+            quality: sharp_config_1.sharpConfig.resize.quality,
+        })
             .toFile(outputPath);
         return newFilename;
     }

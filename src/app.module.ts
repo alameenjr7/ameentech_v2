@@ -15,6 +15,8 @@ import { ToolsModule } from './tools/tools.module';
 import { WorkExperiencesModule } from './work-experiences/work-experiences.module';
 import { MarqueesModule } from './marquees/marquee.module';
 import { MailingModule } from './mailing/mailing.module';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { MailingModule } from './mailing/mailing.module';
       isGlobal: true,
     }),
     PrismaModule,
+    AuthModule,
+    UsersModule,
     ContactsModule,
     ServicesModule,
     ProjectsModule,
@@ -35,7 +39,7 @@ import { MailingModule } from './mailing/mailing.module';
     ToolsModule,
     WorkExperiencesModule,
     MarqueesModule,
-    MailingModule
+    MailingModule,
   ],
 })
 export class AppModule {}

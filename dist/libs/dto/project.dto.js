@@ -23,25 +23,37 @@ __decorate([
     __metadata("design:type", String)
 ], CreateProjectDto.prototype, "title", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Description du projet', example: 'Développement d\'un site vitrine pour un client.' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Description du projet',
+        example: "Développement d'un site vitrine pour un client.",
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProjectDto.prototype, "description", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Image du projet', example: 'project-image.png' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Image du projet',
+        example: 'project-image.png',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProjectDto.prototype, "image", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Technologies utilisées (chaîne JSON)', example: '["NestJS", "React", "MySQL"]' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Technologies utilisées (chaîne JSON)',
+        example: '["NestJS", "React", "MySQL"]',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProjectDto.prototype, "technologies", void 0);
 __decorate([
-    (0, swagger_1.ApiProperty)({ description: 'Technologies utilisées (chaîne JSON)', example: '["NestJS", "React", "MySQL"]' }),
+    (0, swagger_1.ApiProperty)({
+        description: 'Technologies utilisées (chaîne JSON)',
+        example: '["NestJS", "React", "MySQL"]',
+    }),
     (0, class_validator_1.IsNotEmpty)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -53,19 +65,25 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateProjectDto.prototype, "isActive", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Ordre d\'affichage', example: 1 }),
+    (0, swagger_1.ApiPropertyOptional)({ description: "Ordre d'affichage", example: 1 }),
     (0, class_validator_1.IsOptional)(),
     (0, class_transformer_1.Type)(() => Number),
     __metadata("design:type", Number)
 ], CreateProjectDto.prototype, "order", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Nom du client', example: 'Entreprise X' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Nom du client',
+        example: 'Entreprise X',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
 ], CreateProjectDto.prototype, "clientName", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'URL du projet', example: 'https://exemple.com' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'URL du projet',
+        example: 'https://exemple.com',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsUrl)(),
     __metadata("design:type", String)
@@ -89,7 +107,10 @@ __decorate([
     __metadata("design:type", Boolean)
 ], CreateProjectDto.prototype, "isFeatured", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Slug SEO-friendly', example: 'site-vitrine' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Slug SEO-friendly',
+        example: 'site-vitrine',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
@@ -101,14 +122,20 @@ __decorate([
     __metadata("design:type", String)
 ], CreateProjectDto.prototype, "category", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de création', example: '2024-05-01T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de création',
+        example: '2024-05-01T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),
     __metadata("design:type", Date)
 ], CreateProjectDto.prototype, "createdAt", void 0);
 __decorate([
-    (0, swagger_1.ApiPropertyOptional)({ description: 'Date de mise à jour', example: '2024-05-02T12:00:00Z' }),
+    (0, swagger_1.ApiPropertyOptional)({
+        description: 'Date de mise à jour',
+        example: '2024-05-02T12:00:00Z',
+    }),
     (0, class_validator_1.IsOptional)(),
     (0, class_validator_1.IsDate)(),
     (0, class_transformer_1.Type)(() => Date),

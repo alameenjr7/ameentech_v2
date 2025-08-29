@@ -7,6 +7,6 @@ import { SharpModule } from '../../libs/sharp/sharp.module';
 @Module({
   imports: [PrismaModule, SharpModule],
   controllers: [SettingsController],
-  providers: [SettingsService]
+  providers: [SettingsService],
 })
-export class SettingsModule {} 
+export class SettingsModule {}

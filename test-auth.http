@@ -1,0 +1,70 @@
+### Test d'inscription
+POST http://localhost:3000/auth/register
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123",
+  "firstName": "Test",
+  "lastName": "User"
+}
+
+### Test de connexion
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "admin123"
+}
+
+### Test de connexion avec l'utilisateur créé
+POST http://localhost:3000/auth/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "password123"
+}
+
+### Test du profil (remplacer <token> par le token reçu)
+GET http://localhost:3000/auth/profile
+Authorization: Bearer <token>
+
+### Test de changement de mot de passe
+POST http://localhost:3000/auth/change-password
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "currentPassword": "password123",
+  "newPassword": "newpassword123"
+}
+
+### Test de mise à jour du profil
+PATCH http://localhost:3000/auth/profile
+Authorization: Bearer <token>
+Content-Type: application/json
+
+{
+  "firstName": "Updated First Name",
+  "lastName": "Updated Last Name",
+  "email": "updated@example.com"
+}
+
+### Test de création d'utilisateur (Admin uniquement)
+POST http://localhost:3000/users
+Authorization: Bearer <admin-token>
+Content-Type: application/json
+
+{
+  "email": "newuser@example.com",
+  "password": "password123",
+  "firstName": "New",
+  "lastName": "User",
+  "role": "USER"
+}
+
+### Test de liste des utilisateurs (Admin uniquement)
+GET http://localhost:3000/users
+Authorization: Bearer <admin-token>

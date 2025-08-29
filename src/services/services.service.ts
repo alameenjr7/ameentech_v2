@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateServiceDto, UpdateServiceDto } from '../../libs/dto/service.dto';
 import { SearchDto } from 'libs/global/search.dto';
@@ -33,10 +37,7 @@ export class ServicesService {
     const where: any = {};
 
     if (q) {
-      where.OR = [
-        { title: { contains: q } },
-        { description: { contains: q } },
-      ];
+      where.OR = [{ title: { contains: q } }, { description: { contains: q } }];
     }
 
     const orderBy: any = {};
@@ -54,7 +55,9 @@ export class ServicesService {
         skip: offset,
       });
     } catch (error) {
-      throw new BadRequestException('Erreur lors de la récupération des services');
+      throw new BadRequestException(
+        'Erreur lors de la récupération des services',
+      );
     }
   }
 
@@ -62,13 +65,12 @@ export class ServicesService {
     try {
       return await this.prisma.service.findMany({
         where: { isActive: true },
-        orderBy: [
-          { order: 'asc' },
-          { createdAt: 'desc' },
-        ],
+        orderBy: [{ order: 'asc' }, { createdAt: 'desc' }],
       });
     } catch (error) {
-      throw new BadRequestException('Erreur lors de la récupération des services actifs');
+      throw new BadRequestException(
+        'Erreur lors de la récupération des services actifs',
+      );
     }
   }
 
@@ -88,10 +90,15 @@ export class ServicesService {
 
       return service;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
-      throw new BadRequestException('Erreur lors de la récupération du service');
+      throw new BadRequestException(
+        'Erreur lors de la récupération du service',
+      );
     }
   }
 
@@ -148,10 +155,15 @@ export class ServicesService {
 
       return updatedService;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
-      throw new BadRequestException('Erreur lors de la mise à jour du statut actif du service');
+      throw new BadRequestException(
+        'Erreur lors de la mise à jour du statut actif du service',
+      );
     }
   }
 }

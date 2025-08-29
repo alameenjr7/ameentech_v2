@@ -9,6 +9,7 @@ export declare class FaqsService {
         updatedAt: Date;
         question: string;
         answer: string | null;
+        order: number;
         id: number;
     }>;
     findAll(searchDto?: SearchDto): Promise<{
@@ -16,6 +17,7 @@ export declare class FaqsService {
         updatedAt: Date;
         question: string;
         answer: string | null;
+        order: number;
         id: number;
     }[]>;
     findOne(id: number): Promise<{
@@ -23,6 +25,7 @@ export declare class FaqsService {
         updatedAt: Date;
         question: string;
         answer: string | null;
+        order: number;
         id: number;
     }>;
     update(id: number, updateFaqDto: UpdateFaqDto): Promise<{
@@ -30,6 +33,7 @@ export declare class FaqsService {
         updatedAt: Date;
         question: string;
         answer: string | null;
+        order: number;
         id: number;
     }>;
     remove(id: number): Promise<{
@@ -37,6 +41,7 @@ export declare class FaqsService {
         updatedAt: Date;
         question: string;
         answer: string | null;
+        order: number;
         id: number;
     }>;
 }

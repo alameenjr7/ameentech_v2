@@ -71,7 +71,11 @@ __decorate([
                 isActive: { type: 'boolean', example: true },
                 order: { type: 'number', example: 1 },
                 serviceId: { type: 'number', example: 1 },
-                image: { type: 'string', format: 'binary', description: 'Image du projet' },
+                image: {
+                    type: 'string',
+                    format: 'binary',
+                    description: 'Image du projet',
+                },
             },
         },
     }),
@@ -95,7 +99,10 @@ __decorate([
 __decorate([
     (0, common_1.Get)('active'),
     (0, swagger_1.ApiOperation)({ summary: 'Get active projects' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Active projects retrieved successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Active projects retrieved successfully',
+    }),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", void 0)
@@ -105,7 +112,11 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Get a project by ID' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Project retrieved successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Project not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Project not found',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -116,7 +127,11 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Update a project' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Project updated successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Project not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Project not found',
+        type: error_response_1.ErrorResponse,
+    }),
     (0, swagger_1.ApiConsumes)('multipart/form-data'),
     (0, swagger_1.ApiBody)({
         description: 'Data to update a project. All fields are optional.',
@@ -135,7 +150,11 @@ __decorate([
                 isFeatured: { type: 'boolean' },
                 isActive: { type: 'boolean' },
                 order: { type: 'number' },
-                image: { type: 'string', format: 'binary', description: 'Image du projet' },
+                image: {
+                    type: 'string',
+                    format: 'binary',
+                    description: 'Image du projet',
+                },
             },
         },
     }),
@@ -150,9 +169,16 @@ __decorate([
 __decorate([
     (0, common_1.Put)(':id/toggle'),
     (0, swagger_1.ApiOperation)({ summary: 'Toggle project active status' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Project active status toggled successfully' }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Project active status toggled successfully',
+    }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Project not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Project not found',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
@@ -163,7 +189,11 @@ __decorate([
     (0, swagger_1.ApiOperation)({ summary: 'Delete a project' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Project deleted successfully' }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'Bad request', type: error_response_1.ErrorResponse }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Project not found', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Project not found',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),

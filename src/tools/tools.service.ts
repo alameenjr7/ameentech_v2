@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateToolDto, UpdateToolDto } from '../../libs/dto/tool.dto';
 import { SearchDto } from '../../libs/global/search.dto';
@@ -33,9 +37,7 @@ export class ToolsService {
     const where: any = {};
 
     if (q) {
-      where.OR = [
-        { name: { contains: q } },
-      ];
+      where.OR = [{ name: { contains: q } }];
     }
 
     const orderBy: any = {};
@@ -73,7 +75,10 @@ export class ToolsService {
 
       return tool;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
       throw new BadRequestException('Error retrieving tool');

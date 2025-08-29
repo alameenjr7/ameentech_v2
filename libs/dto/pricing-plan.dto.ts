@@ -1,4 +1,11 @@
-import { IsNotEmpty, IsString, IsOptional, IsDate, IsNumber, IsBoolean } from 'class-validator';
+import {
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+  IsDate,
+  IsNumber,
+  IsBoolean,
+} from 'class-validator';
 import { ApiProperty, ApiPropertyOptional, PartialType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 
@@ -8,12 +15,15 @@ export class CreatePricingPlanDto {
   @IsString()
   name: string;
 
-  @ApiProperty({ description: 'Price of the plan', example: 10.00 })
+  @ApiProperty({ description: 'Price of the plan', example: 10.0 })
   @IsNotEmpty()
   @IsNumber()
   price: number;
 
-  @ApiProperty({ description: 'Features of the plan (JSON string)', example: '["Feature 1", "Feature 2"]' })
+  @ApiProperty({
+    description: 'Features of the plan (JSON string)',
+    example: '["Feature 1", "Feature 2"]',
+  })
   @IsNotEmpty()
   @IsString()
   features: string;
@@ -28,13 +38,19 @@ export class CreatePricingPlanDto {
   @IsBoolean()
   popular?: boolean;
 
-  @ApiPropertyOptional({ description: 'Creation date', example: '2024-05-01T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Creation date',
+    example: '2024-05-01T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)
   createdAt?: Date;
 
-  @ApiPropertyOptional({ description: 'Update date', example: '2024-05-02T12:00:00Z' })
+  @ApiPropertyOptional({
+    description: 'Update date',
+    example: '2024-05-02T12:00:00Z',
+  })
   @IsOptional()
   @IsDate()
   @Type(() => Date)

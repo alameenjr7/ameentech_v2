@@ -8,7 +8,13 @@ import {
   Delete,
   Query,
 } from '@nestjs/common';
-import { ApiTags, ApiOperation, ApiResponse, ApiParam, ApiQuery } from '@nestjs/swagger';
+import {
+  ApiTags,
+  ApiOperation,
+  ApiResponse,
+  ApiParam,
+  ApiQuery,
+} from '@nestjs/swagger';
 import { ToolsService } from './tools.service';
 import { CreateToolDto, UpdateToolDto } from '../../libs/dto/tool.dto';
 import { ErrorResponse } from '../../libs/errors/error.response';
@@ -30,10 +36,30 @@ export class ToolsController {
   @Get()
   @ApiOperation({ summary: 'Get all tools' })
   @ApiQuery({ name: 'q', required: false, description: 'Search query string' })
-  @ApiQuery({ name: 'order_by', required: false, enum: ['name', 'createdAt'], description: 'Sort by name or creation date' })
-  @ApiQuery({ name: 'order_dir', required: false, enum: ['asc', 'desc'], description: 'Sort direction' })
-  @ApiQuery({ name: 'limit', required: false, description: 'Limit number of results', type: Number })
-  @ApiQuery({ name: 'offset', required: false, description: 'Offset for pagination', type: Number })
+  @ApiQuery({
+    name: 'order_by',
+    required: false,
+    enum: ['name', 'createdAt'],
+    description: 'Sort by name or creation date',
+  })
+  @ApiQuery({
+    name: 'order_dir',
+    required: false,
+    enum: ['asc', 'desc'],
+    description: 'Sort direction',
+  })
+  @ApiQuery({
+    name: 'limit',
+    required: false,
+    description: 'Limit number of results',
+    type: Number,
+  })
+  @ApiQuery({
+    name: 'offset',
+    required: false,
+    description: 'Offset for pagination',
+    type: Number,
+  })
   @ApiResponse({ status: 200, description: 'List of tools' })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   findAll(@Query() searchDto: SearchDto) {
@@ -44,7 +70,11 @@ export class ToolsController {
   @ApiOperation({ summary: 'Get a tool by ID' })
   @ApiParam({ name: 'id', description: 'Tool ID' })
   @ApiResponse({ status: 200, description: 'Tool found' })
-  @ApiResponse({ status: 404, description: 'Tool not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Tool not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   findOne(@Param('id') id: string) {
     return this.toolsService.findOne(+id);
@@ -54,7 +84,11 @@ export class ToolsController {
   @ApiOperation({ summary: 'Update a tool' })
   @ApiParam({ name: 'id', description: 'Tool ID' })
   @ApiResponse({ status: 200, description: 'Tool updated successfully' })
-  @ApiResponse({ status: 404, description: 'Tool not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Tool not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   update(@Param('id') id: string, @Body() updateToolDto: UpdateToolDto) {
     return this.toolsService.update(+id, updateToolDto);
@@ -64,7 +98,11 @@ export class ToolsController {
   @ApiOperation({ summary: 'Delete a tool' })
   @ApiParam({ name: 'id', description: 'Tool ID' })
   @ApiResponse({ status: 200, description: 'Tool deleted successfully' })
-  @ApiResponse({ status: 404, description: 'Tool not found', type: ErrorResponse })
+  @ApiResponse({
+    status: 404,
+    description: 'Tool not found',
+    type: ErrorResponse,
+  })
   @ApiResponse({ status: 400, description: 'Bad request', type: ErrorResponse })
   remove(@Param('id') id: string) {
     return this.toolsService.remove(+id);

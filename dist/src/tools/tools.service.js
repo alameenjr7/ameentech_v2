@@ -34,9 +34,7 @@ let ToolsService = class ToolsService {
         const { q, order_by = 'createdAt', order_dir = 'desc', limit, offset, } = searchDto || {};
         const where = {};
         if (q) {
-            where.OR = [
-                { name: { contains: q } },
-            ];
+            where.OR = [{ name: { contains: q } }];
         }
         const orderBy = {};
         if (order_by === 'name') {
@@ -71,7 +69,8 @@ let ToolsService = class ToolsService {
             return tool;
         }
         catch (error) {
-            if (error instanceof common_1.NotFoundException || error instanceof common_1.BadRequestException) {
+            if (error instanceof common_1.NotFoundException ||
+                error instanceof common_1.BadRequestException) {
                 throw error;
             }
             throw new common_1.BadRequestException('Error retrieving tool');

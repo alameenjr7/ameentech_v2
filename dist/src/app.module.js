@@ -24,6 +24,8 @@ const tools_module_1 = require("./tools/tools.module");
 const work_experiences_module_1 = require("./work-experiences/work-experiences.module");
 const marquee_module_1 = require("./marquees/marquee.module");
 const mailing_module_1 = require("./mailing/mailing.module");
+const auth_module_1 = require("./auth/auth.module");
+const users_module_1 = require("./users/users.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -34,6 +36,8 @@ exports.AppModule = AppModule = __decorate([
                 isGlobal: true,
             }),
             prisma_module_1.PrismaModule,
+            auth_module_1.AuthModule,
+            users_module_1.UsersModule,
             contacts_module_1.ContactsModule,
             services_module_1.ServicesModule,
             projects_module_1.ProjectsModule,
@@ -47,7 +51,7 @@ exports.AppModule = AppModule = __decorate([
             tools_module_1.ToolsModule,
             work_experiences_module_1.WorkExperiencesModule,
             marquee_module_1.MarqueesModule,
-            mailing_module_1.MailingModule
+            mailing_module_1.MailingModule,
         ],
     })
 ], AppModule);

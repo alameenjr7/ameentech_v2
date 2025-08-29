@@ -14,8 +14,8 @@ export declare class ProjectsController {
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
-        image: string | null;
         order: number;
+        image: string | null;
         clientName: string | null;
         projectUrl: string | null;
         serviceId: number | null;
@@ -34,8 +34,8 @@ export declare class ProjectsController {
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
-        image: string | null;
         order: number;
+        image: string | null;
         clientName: string | null;
         projectUrl: string | null;
         serviceId: number | null;
@@ -54,8 +54,8 @@ export declare class ProjectsController {
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
-        image: string | null;
         order: number;
+        image: string | null;
         clientName: string | null;
         projectUrl: string | null;
         serviceId: number | null;
@@ -74,8 +74,8 @@ export declare class ProjectsController {
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
-        image: string | null;
         order: number;
+        image: string | null;
         clientName: string | null;
         projectUrl: string | null;
         serviceId: number | null;
@@ -94,8 +94,8 @@ export declare class ProjectsController {
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
-        image: string | null;
         order: number;
+        image: string | null;
         clientName: string | null;
         projectUrl: string | null;
         serviceId: number | null;
@@ -114,8 +114,8 @@ export declare class ProjectsController {
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
-        image: string | null;
         order: number;
+        image: string | null;
         clientName: string | null;
         projectUrl: string | null;
         serviceId: number | null;
@@ -133,9 +133,9 @@ export declare class ProjectsController {
         createdAt: Date;
         updatedAt: Date;
         category: string | null;
+        order: number;
         image: string | null;
         technologies: string;
-        order: number;
         clientName: string | null;
         projectUrl: string | null;
         serviceId: number | null;

@@ -55,10 +55,22 @@ __decorate([
             properties: {
                 title: { type: 'string', example: 'À propos de nous' },
                 description: { type: 'string', example: 'Nous sommes une équipe...' },
-                paragraphs: { type: 'string', example: '["Paragraphe 1", "Paragraphe 2"]' },
-                stats: { type: 'string', example: '[{"number":"10+","label":"Projets"}]' },
-                yearExperience: { type: 'string', example: '[{"number":"10+","label":"Années d\'expérience"}]' },
-                clients: { type: 'string', example: '[{"number":"100+","label":"Clients"}]' },
+                paragraphs: {
+                    type: 'string',
+                    example: '["Paragraphe 1", "Paragraphe 2"]',
+                },
+                stats: {
+                    type: 'string',
+                    example: '[{"number":"10+","label":"Projets"}]',
+                },
+                yearExperience: {
+                    type: 'string',
+                    example: '[{"number":"10+","label":"Années d\'expérience"}]',
+                },
+                clients: {
+                    type: 'string',
+                    example: '[{"number":"100+","label":"Clients"}]',
+                },
                 signature: { type: 'string', example: 'Baaba NGOM' },
                 imageUrl: {
                     type: 'string',
@@ -78,8 +90,16 @@ __decorate([
 __decorate([
     (0, common_1.Get)(),
     (0, swagger_1.ApiOperation)({ summary: 'Récupérer toutes les sections About' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Liste des sections About', type: [about_dto_1.AboutDto] }),
-    (0, swagger_1.ApiResponse)({ status: 400, description: 'Paramètres de recherche invalides', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Liste des sections About',
+        type: [about_dto_1.AboutDto],
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 400,
+        description: 'Paramètres de recherche invalides',
+        type: error_response_1.ErrorResponse,
+    }),
     __param(0, (0, common_1.Query)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [search_dto_1.SearchDto]),
@@ -88,8 +108,16 @@ __decorate([
 __decorate([
     (0, common_1.Get)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Récupérer une section About par ID' }),
-    (0, swagger_1.ApiResponse)({ status: 200, description: 'Section About trouvée', type: about_dto_1.AboutDto }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Section About non trouvée', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 200,
+        description: 'Section About trouvée',
+        type: about_dto_1.AboutDto,
+    }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Section About non trouvée',
+        type: error_response_1.ErrorResponse,
+    }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'ID invalide', type: error_response_1.ErrorResponse }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
@@ -118,7 +146,7 @@ __decorate([
                 imageUrl: {
                     type: 'string',
                     format: 'binary',
-                    description: 'Nouveau fichier image pour remplacer l\'ancien.',
+                    description: "Nouveau fichier image pour remplacer l'ancien.",
                 },
             },
         },
@@ -135,7 +163,11 @@ __decorate([
     (0, common_1.Delete)(':id'),
     (0, swagger_1.ApiOperation)({ summary: 'Supprimer une section About' }),
     (0, swagger_1.ApiResponse)({ status: 200, description: 'Section About supprimée' }),
-    (0, swagger_1.ApiResponse)({ status: 404, description: 'Section About non trouvée', type: error_response_1.ErrorResponse }),
+    (0, swagger_1.ApiResponse)({
+        status: 404,
+        description: 'Section About non trouvée',
+        type: error_response_1.ErrorResponse,
+    }),
     (0, swagger_1.ApiResponse)({ status: 400, description: 'ID invalide', type: error_response_1.ErrorResponse }),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),

@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  BadRequestException,
+} from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateSettingDto, UpdateSettingDto } from '../../libs/dto/setting.dto';
 import { SearchDto } from '../../libs/global/search.dto';
@@ -24,13 +28,25 @@ export class SettingsService {
 
   async create(data: CreateSettingDto, files: SettingFiles = {}) {
     try {
-      const dataToCreate: any = { ...data, createdAt: new Date(), updatedAt: new Date() };
+      const dataToCreate: any = {
+        ...data,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      };
 
-      const fileFields: SettingFileField[] = ['logo', 'logo_2', 'favicon', 'meta_image'];
+      const fileFields: SettingFileField[] = [
+        'logo',
+        'logo_2',
+        'favicon',
+        'meta_image',
+      ];
       for (const field of fileFields) {
         const file = files[field]?.[0];
         if (file) {
-          dataToCreate[field] = await this.sharpService.resizeImage(file.buffer, file.originalname);
+          dataToCreate[field] = await this.sharpService.resizeImage(
+            file.buffer,
+            file.originalname,
+          );
         }
       }
 
@@ -52,10 +68,7 @@ export class SettingsService {
     const where: any = {};
 
     if (q) {
-      where.OR = [
-        { title: { contains: q } },
-        { description: { contains: q } },
-      ];
+      where.OR = [{ title: { contains: q } }, { description: { contains: q } }];
     }
 
     const orderBy: any = {};
@@ -73,7 +86,9 @@ export class SettingsService {
         skip: offset,
       });
     } catch (error) {
-      throw new BadRequestException('Erreur lors de la récupération des paramètres');
+      throw new BadRequestException(
+        'Erreur lors de la récupération des paramètres',
+      );
     }
   }
 
@@ -87,10 +102,15 @@ export class SettingsService {
       if (!setting) throw new NotFoundException('Paramètre non trouvé');
       return setting;
     } catch (error) {
-      if (error instanceof NotFoundException || error instanceof BadRequestException) {
+      if (
+        error instanceof NotFoundException ||
+        error instanceof BadRequestException
+      ) {
         throw error;
       }
-      throw new BadRequestException('Erreur lors de la récupération du paramètre');
+      throw new BadRequestException(
+        'Erreur lors de la récupération du paramètre',
+      );
     }
   }
 
@@ -103,23 +123,41 @@ export class SettingsService {
     try {
       const dataToUpdate: any = { ...data, updatedAt: new Date() };
 
-      const fileFields: SettingFileField[] = ['logo', 'logo_2', 'favicon', 'meta_image'];
+      const fileFields: SettingFileField[] = [
+        'logo',
+        'logo_2',
+        'favicon',
+        'meta_image',
+      ];
       for (const field of fileFields) {
         const file = files[field]?.[0];
         if (file) {
-          dataToUpdate[field] = await this.sharpService.resizeImage(file.buffer, file.originalname);
+          dataToUpdate[field] = await this.sharpService.resizeImage(
+            file.buffer,
+            file.originalname,
+          );
           const oldImage = setting[field];
           if (oldImage) {
             try {
               await fs.unlink(sharpConfig.getOutputPath(oldImage));
-            } catch(e) { console.error(`Impossible de supprimer l'ancienne image: ${oldImage}`, e); }
+            } catch (e) {
+              console.error(
+                `Impossible de supprimer l'ancienne image: ${oldImage}`,
+                e,
+              );
+            }
           }
         }
       }
 
-      return await this.prisma.setting.update({ where: { id }, data: dataToUpdate });
+      return await this.prisma.setting.update({
+        where: { id },
+        data: dataToUpdate,
+      });
     } catch (error) {
-      throw new BadRequestException('Erreur lors de la mise à jour du paramètre');
+      throw new BadRequestException(
+        'Erreur lors de la mise à jour du paramètre',
+      );
     }
   }
 
@@ -131,7 +169,9 @@ export class SettingsService {
     try {
       return await this.prisma.setting.delete({ where: { id } });
     } catch (error) {
-      throw new BadRequestException('Erreur lors de la suppression du paramètre');
+      throw new BadRequestException(
+        'Erreur lors de la suppression du paramètre',
+      );
     }
   }
 }

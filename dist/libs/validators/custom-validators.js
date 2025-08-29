@@ -10,7 +10,7 @@ function IsJsonString(validationOptions) {
             propertyName: propertyName,
             options: validationOptions,
             validator: {
-                validate(value, args) {
+                validate(value) {
                     if (typeof value !== 'string')
                         return false;
                     try {
